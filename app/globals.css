@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 * {
   font-family: "Outfit";
 }
@@ -23,3 +24,14 @@
   font-family: "Ovo", serif;
 }
 
+.boxShadowBlack {
+  box-shadow: 4px 4px 0px #000;
+}
+
+.boxShadowWhite {
+  box-shadow: 4px 4px 0px #FFF;
+}
+
+.gridTemplate {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
