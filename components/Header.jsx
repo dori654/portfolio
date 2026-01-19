@@ -7,13 +7,13 @@ export const Header = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
 
   return (
-    <header className="flex h-screen w-11/12 max-w-3xl flex-col items-center justify-center gap-4 px-4 text-center mx-auto">
+    <header className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-4 py-12 sm:py-0 sm:gap-4">
       {/* תמונת פרופיל */}
       <div className="mb-2 sm:mb-4 flex-shrink-0">
         <Image
           src={assets.MyPic}
           alt="Profile picture of Dori Fourer"
-          className="w-32 rounded-full border-2 border-[var(--devops-primary)]"
+          className="w-32 sm:w-32 rounded-full border-4 sm:border-2 border-[var(--devops-primary)]"
         />
       </div>
 
