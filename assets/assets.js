@@ -35,6 +35,24 @@ import right_arrow from "./right-arrow.png";
 import send_icon from "./send-icon.png";
 import right_arrow_bold from "./right-arrow-bold.png";
 import right_arrow_bold_dark from "./right-arrow-bold-dark.png";
+import AWS from "./AWS.png";
+import argoCD from "./Argo CD.png";
+import bash from "./Bash.png";
+import docker from "./Docker.png";
+import githubActions from "./GitHub Actions.png";
+import googleCloud from "./Google Cloud.png";
+import grafana from "./Grafana.png";
+import terraform from "./HashiCorp Terraform.png";
+import jenkins from "./Jenkins.png";
+import kibana from "./Kibana.png";
+import kubernetes from "./Kubernetes.png";
+import linux from "./Linux.png";
+import prometheus from "./Prometheus.png";
+import python from "./python.png";
+import full_arc_cat_agency from "./Full_architecture.png";
+import MyPic from "./mypic.jpeg";
+import linkedin_icon from "./linkedin.png";
+import github_icon from "./github.png";
 
 export const assets = {
   user_image,
@@ -74,56 +92,80 @@ export const assets = {
   send_icon,
   right_arrow_bold,
   right_arrow_bold_dark,
+  AWS,
+  argoCD,
+  bash,
+  docker,
+  githubActions,
+  googleCloud,
+  grafana,
+  terraform,
+  jenkins,
+  kibana,
+  kubernetes,
+  linux,
+  prometheus,
+  python,
+  full_arc_cat_agency,
+  MyPic,
+  linkedin_icon,
+  github_icon,
 };
 
 export const workData = [
   {
-    title: "Frontend project",
-    description: "Web Design",
-    bgImage: "/work-1.jpg",
+    title: "Cat Agency – Cloud-Native DevOps Project",
+    description:
+      "End-to-end cloud-native system including application, infrastructure as code, and GitOps-based delivery. Built and operated as a production-like DevOps environment.",
+    bgImage: "/Full_architecture.png",
   },
   {
-    title: "Geo based app",
-    description: "Mobile App",
-    bgImage: "/work-2.png",
+    title: "Cat Agency – Infrastructure as Code (AWS & GCP)",
+    description:
+      "Provisioned cloud infrastructure using Terraform, including networking, compute, IAM, and managed Kubernetes clusters.",
+    bgImage: "/HashiCorp_Terraform.png",
   },
   {
-    title: "Photography site",
-    description: "Web Design",
-    bgImage: "/work-3.png",
+    title: "Cat Agency – CI/CD & GitOps",
+    description:
+      "Designed CI/CD pipelines and GitOps workflows to automate build, test, and deployment processes using modern DevOps practices.",
+    bgImage: "/k8s2.png",
   },
   {
-    title: "UI/UX designing",
-    description: "UI/UX Design",
-    bgImage: "/work-4.png",
+    title: "Cat Agency – Monitoring & Observability",
+    description:
+      "Implemented monitoring and logging using Prometheus, Grafana, and centralized logging to ensure system reliability and visibility.",
+    bgImage: "/work-monitoring.png",
   },
 ];
 
 export const serviceData = [
   {
-    icon: assets.web_icon,
-    title: "Web design",
-    description: "Web development is the process of building, programming...",
-    link: "",
-  },
-  {
-    icon: assets.mobile_icon,
-    title: "Mobile app",
+    icon: assets.kubernetes,
+    title: "Container Orchestration",
     description:
-      "Mobile app development involves creating software for mobile devices...",
+      "Hands-on experience designing and deploying Kubernetes clusters. Built and operated containerized microservices using Docker and Kubernetes with a focus on scalability and reliability.",
     link: "",
   },
   {
-    icon: assets.ui_icon,
-    title: "UI/UX design",
+    icon: assets.githubActions,
+    title: "CI/CD Pipelines",
     description:
-      "UI/UX design focuses on creating a seamless user experience...",
+      "Designed and implemented CI/CD pipelines using GitHub Actions, Jenkins, and ArgoCD to automate build, test, and deployment workflows in project-based environments.",
     link: "",
   },
   {
-    icon: assets.graphics_icon,
-    title: "Graphics design",
-    description: "Creative design solutions to enhance visual communication...",
+    icon: assets.googleCloud,
+    title: "Cloud Infrastructure & IaC",
+    description:
+      "Implemented cloud infrastructure on AWS and GCP using Terraform and Ansible, including networking, compute, IAM, and managed Kubernetes services.",
+    link: "",
+  },
+  {
+    icon: assets.prometheus,
+    title: "Monitoring & Observability",
+    description:
+      "Implemented monitoring and logging solutions using Prometheus, Grafana, and ELK stack to gain system visibility and troubleshoot production-like environments.",
     link: "",
   },
 ];
@@ -132,27 +174,38 @@ export const infoList = [
   {
     icon: assets.code_icon,
     iconDark: assets.code_icon_dark,
-    title: "Languages",
-    description: "HTML, CSS, JavaScript React Js, Next Js",
+    title: "Core Technologies",
+    description: "Kubernetes, Docker, Terraform, Python, Bash",
   },
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
-    title: "Education",
-    description: "B.Tech in Computer Science",
+    title: "Cloud Platforms",
+    description: "AWS, GCP - Multi-cloud expertise",
   },
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
-    title: "Projects",
-    description: "Built more than 5 projects",
+    title: "CI/CD Tools",
+    description: "Jenkins, GitHub Actions, ArgoCD",
   },
 ];
 
 export const toolsData = [
-  assets.vscode,
-  assets.firebase,
-  assets.mongodb,
-  assets.figma,
-  assets.git,
+  { icon: assets.vscode, name: "VS Code" },
+  { icon: assets.python, name: "Python" },
+  { icon: assets.bash, name: "Bash" },
+  { icon: assets.git, name: "Git" },
+  { icon: assets.linux, name: "Linux" },
+  { icon: assets.AWS, name: "AWS" },
+  { icon: assets.googleCloud, name: "Google Cloud" },
+  { icon: assets.jenkins, name: "Jenkins" },
+  { icon: assets.githubActions, name: "GitHub Actions" },
+  { icon: assets.docker, name: "Docker" },
+  { icon: assets.kubernetes, name: "Kubernetes" },
+  { icon: assets.terraform, name: "Terraform" },
+  { icon: assets.argoCD, name: "Argo CD" },
+  { icon: assets.grafana, name: "Grafana" },
+  { icon: assets.prometheus, name: "Prometheus" },
+  { icon: assets.kibana, name: "Kibana" },
 ];
