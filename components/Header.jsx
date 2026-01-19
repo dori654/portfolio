@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <header className="flex h-screen w-11/12 max-w-3xl flex-col items-center justify-center gap-4 px-4 text-center mx-auto">
       {/* תמונת פרופיל */}
-      <div className="mb-4">
+      <div className="mb-2 sm:mb-4 flex-shrink-0">
         <Image
           src={assets.MyPic}
           alt="Profile picture of Dori Fourer"
