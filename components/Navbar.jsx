@@ -1,147 +1,135 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
+import { motion, AnimatePresence } from "framer-motion";
 import ContactModal from "./ContactModal";
-
 
 const Navbar = () => {
   const [isScroll, setIsScroll] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isContactOpen, setIsContactOpen] = useState(false);
-  const sideMenuRef = useRef();
-  const openMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(-16rem)";
-  };
-  const closeMenu = () => {
-    sideMenuRef.current.style.transform = "translateX(16rem)";
-  };
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (scrollY > 50) {
-        setIsScroll(true);
-      } else {
-        setIsScroll(false);
-      }
-    });
+    const handleScroll = () => setIsScroll(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navLinks = [
+    { label: "Home", href: "#top" },
+    { label: "About", href: "#about" },
+    { label: "Tech Stack", href: "#techstack" },
+    { label: "Expertise", href: "#services" },
+    { label: "Projects", href: "#work" },
+  ];
 
   return (
     <>
-      {/* סרגל ניווט */}
-      <nav
-        className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex justify-between items-center z-50 bg-transparent ${
-          isScroll ? "bg-[var(--devops-darker)] bg-opacity-90 backdrop-blur-lg shadow-[0_4px_20px_rgba(79,209,197,0.1)]" : ""
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className={`w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex justify-between items-center z-50 transition-all duration-300 ${
+          isScroll
+            ? "glass shadow-lg"
+            : "bg-transparent"
         }`}
       >
-        {/* לוגו */}
-        <a href="#top" aria-label="Back to Top">
-          <Image
-            // src={assets.logo}
-            
-            className="w-28 cursor-pointer mr-14 brightness-0 invert"
-          />
+        <a href="#top" className="text-xl font-bold gradient-text-alt">
+          DF
         </a>
 
-        {/* תפריט דסקטופ */}
-        <ul
-          className={`hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 ${
-            isScroll ? "" : "bg-[var(--devops-darker)] shadow-[0_0_20px_rgba(79,209,197,0.2)] border border-[var(--devops-primary)]"
-          }`}
-        >
+        <ul className="hidden md:flex items-center gap-6 lg:gap-8">
+          {navLinks.map((link) => (
+            <li key={link.label}>
+              <a
+                className="font-Outfit text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors duration-300"
+                href={link.href}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
           <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" href="#top">
-              Home
-            </a>
-          </li>
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" href="#about">
-              About Me
-            </a>
-          </li>
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" href="#services">
-              Services
-            </a>
-          </li>{" "}
-          {/* תיקון spelling */}
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" href="#work">
-              My Work
-            </a>
-          </li>
-          <li>
-            <button onClick={() => setIsContactOpen(true)} className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors cursor-pointer bg-none border-none p-0">
-              Contact Me
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className="font-Outfit text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors duration-300 cursor-pointer bg-transparent border-none p-0"
+            >
+              Contact
             </button>
           </li>
         </ul>
 
-        {/* כפתורים צדדיים */}
-        <div className="flex items-center">
-          
-
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setIsContactOpen(true)}
-            className="hidden lg:flex items-center gap-3 px-10 py-2.5 border-2 border-[var(--devops-primary)] text-[var(--devops-primary)] hover:bg-[var(--devops-primary)] hover:text-[var(--devops-dark)] rounded-full ml-4 font-Ovo transition-all duration-300 bg-transparent cursor-pointer"
+            className="hidden lg:flex items-center gap-2 px-6 py-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] text-white text-sm font-medium hover:opacity-90 transition-opacity duration-300 cursor-pointer"
           >
-            Contact
-            <Image src={assets.arrow_icon} alt="Arrow" className="w-3 brightness-0 invert" />
+            Get in Touch
           </button>
 
-          {/* תפריט מובייל */}
           <button
-            className="block md:hidden ml-3"
-            onClick={openMenu}
+            className="block md:hidden"
+            onClick={() => setIsMobileOpen(true)}
             aria-label="Open Menu"
           >
             <Image src={assets.menu_black} alt="Menu" className="w-6 brightness-0 invert" />
           </button>
         </div>
 
-        {/* תפריט צד למובייל */}
-        <ul
-          ref={sideMenuRef}
-          className="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-[var(--devops-darker)] border-l-2 border-[var(--devops-primary)] transition duration-500"
-        >
-          <li className="absolute right-6 top-6">
-            <button onClick={closeMenu} aria-label="Close Menu">
-              <Image
-                src={assets.close_black}
-                alt="Close"
-                className="w-5 cursor-pointer brightness-0 invert"
+        <AnimatePresence>
+          {isMobileOpen && (
+            <>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+                onClick={() => setIsMobileOpen(false)}
               />
-            </button>
-          </li>
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" onClick={closeMenu} href="#top">
-              Home
-            </a>
-          </li>
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" onClick={closeMenu} href="#about">
-              About Me
-            </a>
-          </li>
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" onClick={closeMenu} href="#services">
-              Services
-            </a>
-          </li>{" "}
-          {/* spelling */}
-          <li>
-            <a className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors" onClick={closeMenu} href="#work">
-              My Work
-            </a>
-          </li>
-          <li>
-            <button onClick={() => { setIsContactOpen(true); closeMenu(); }} className="font-Ovo text-gray-200 hover:text-[var(--devops-primary)] transition-colors cursor-pointer bg-none border-none p-0 text-left">
-              Contact Me
-            </button>
-          </li>
-        </ul>
-      </nav>
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed right-0 top-0 bottom-0 w-72 z-50 glass py-20 px-8 flex flex-col gap-6"
+                style={{ borderRadius: "1rem 0 0 1rem" }}
+              >
+                <button
+                  onClick={() => setIsMobileOpen(false)}
+                  className="absolute right-6 top-6"
+                  aria-label="Close Menu"
+                >
+                  <Image src={assets.close_black} alt="Close" className="w-5 brightness-0 invert" />
+                </button>
+                {navLinks.map((link, i) => (
+                  <motion.a
+                    key={link.label}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg"
+                    href={link.href}
+                    onClick={() => setIsMobileOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+                <motion.button
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: navLinks.length * 0.05 }}
+                  onClick={() => { setIsContactOpen(true); setIsMobileOpen(false); }}
+                  className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg text-left bg-transparent border-none p-0 cursor-pointer"
+                >
+                  Contact
+                </motion.button>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </motion.nav>
 
-      {/* Contact Modal */}
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
   );

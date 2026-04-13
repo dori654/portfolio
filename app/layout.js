@@ -12,8 +12,8 @@ const ovo = Ovo({
 });
 
 export const metadata = {
-  title: "Portfolio - Dori Fourer",
-  description: "",
+  title: "Dori Fourer | Software Engineer",
+  description: "Software Engineer & DevOps Specialist — Building scalable systems from frontend to infrastructure.",
 };
 
 export default function RootLayout({ children }) {

@@ -1,96 +1,152 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
+import { motion } from "framer-motion";
 import ContactModal from "./ContactModal";
+
+const roles = [
+  "Software Engineer",
+  "Full-Stack Developer",
+  "DevOps Specialist",
+  "Cloud Architect",
+];
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 export const Header = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [displayText, setDisplayText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const currentRole = roles[roleIndex];
+    let timeout;
+
+    if (!isDeleting && displayText === currentRole) {
+      timeout = setTimeout(() => setIsDeleting(true), 2000);
+    } else if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setRoleIndex((prev) => (prev + 1) % roles.length);
+    } else if (isDeleting) {
+      timeout = setTimeout(() => setDisplayText((prev) => prev.slice(0, -1)), 40);
+    } else {
+      timeout = setTimeout(
+        () => setDisplayText(currentRole.slice(0, displayText.length + 1)),
+        80
+      );
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, roleIndex]);
 
   return (
-    <header className="flex min-h-screen w-full flex-col items-center justify-center gap-6 px-4 py-12 sm:py-0 sm:gap-4">
-      {/* תמונת פרופיל */}
-      <div className="mb-2 sm:mb-4 flex-shrink-0">
-        <Image
-          src={assets.MyPic}
-          alt="Profile picture of Dori Fourer"
-          className="w-32 sm:w-32 rounded-full border-4 sm:border-2 border-[var(--devops-primary)]"
-        />
+    <header className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 py-12 sm:py-0">
+      {/* Animated gradient blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="hero-blob-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[var(--primary)] opacity-[0.07] blur-[120px]" />
+        <div className="hero-blob-2 absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-[var(--secondary)] opacity-[0.07] blur-[120px]" />
+        <div className="hero-blob-3 absolute bottom-1/4 left-1/3 w-[350px] h-[350px] rounded-full bg-[var(--accent)] opacity-[0.05] blur-[120px]" />
       </div>
 
-      {/* כותרת פתיחה עם אייקון יד */}
-      <h3 className="mb-3 flex items-end gap-2 text-xl md:text-2xl font-Ovo text-[var(--devops-primary)]">
-        Hi! I'm Dori Fourer
-        <Image src={assets.hand_icon} alt="Waving hand" className="w-6" />
-      </h3>
-
-      {/* כותרת מרכזית */}
-      <h1 className="text-3xl sm:text-6xl lg:text-[66px] font-Ovo text-white">
-        DevOps Engineer based in Israel
-      </h1>
-
-      {/* פסקת תיאור */}
-      <p className="mx-auto max-w-2xl font-Ovo text-gray-300">
-        DevOps Engineer with hands-on experience in container orchestration, cloud
-        infrastructure, and CI/CD automation through real-world projects and DevOps
-        bootcamp training. I build and operate scalable, cloud-native systems using
-        Kubernetes, Docker, and modern cloud technologies.
-
-      </p>
-
-      
-
-      {/* כפתורים */}
-      <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row">
-        <button
-          onClick={() => setIsContactOpen(true)}
-          className="flex items-center gap-2 rounded-full border-2 border-[var(--devops-primary)] bg-[var(--devops-primary)] px-10 py-3 text-[var(--devops-dark)] font-semibold hover:bg-transparent hover:text-[var(--devops-primary)] transition-all duration-300 cursor-pointer"
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="relative z-10 flex flex-col items-center gap-6"
+      >
+        {/* Name + role */}
+        <motion.p
+          variants={itemVariants}
+          className="text-[var(--text-secondary)] text-base sm:text-lg tracking-widest uppercase font-Outfit"
         >
-          Contact Me
-          <Image
-            src={assets.right_arrow_white}
-            alt="Right arrow"
-            className="w-4"
-          />
-        </button>
+          Dori Fourer
+        </motion.p>
 
-        <a
-          href="/Dori_Fourer.pdf"
-          download
-          className="flex items-center gap-2 rounded-full border-2 border-[var(--devops-secondary)] px-10 py-3 text-[var(--devops-secondary)] hover:bg-[var(--devops-secondary)] hover:text-white transition-all duration-300"
+        {/* Typing role - large hero text */}
+        <motion.h1
+          variants={itemVariants}
+          className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white text-center leading-tight"
         >
-          My Resume
-          <Image
-            src={assets.download_icon}
-            alt="Download icon"
-            className="w-4"
-          />
-        </a>
-      </div>
+          <span className="gradient-text">{displayText}</span>
+          <span className="typing-cursor text-[var(--primary)]">|</span>
+        </motion.h1>
 
-{/* GitHub and LinkedIn Links */}
-      <div className="flex gap-6 my-10">
-        <a
-          href="https://github.com/dori654"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-[var(--devops-primary)] text-[var(--devops-primary)] hover:bg-[var(--devops-primary)] hover:text-[var(--devops-dark)] transition-all duration-300"
-          aria-label="GitHub Profile"
+        {/* Subtitle */}
+        <motion.p
+          variants={itemVariants}
+          className="text-[var(--text-secondary)] text-base sm:text-lg text-center max-w-xl"
         >
-          <Image src={assets.github_icon} alt="GitHub" className="w-6 brightness-0 invert hover:brightness-100" />
-        </a>
-        <a
-          href="https://linkedin.com/in/dori-fourer"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-[var(--devops-primary)] text-[var(--devops-primary)] hover:bg-[var(--devops-primary)] hover:text-[var(--devops-dark)] transition-all duration-300"
-          aria-label="LinkedIn Profile"
+          Building scalable systems from frontend to infrastructure
+        </motion.p>
+
+        {/* Description */}
+        <motion.p
+          variants={itemVariants}
+          className="mx-auto max-w-2xl text-center text-[var(--text-secondary)] text-sm sm:text-base leading-relaxed"
         >
-          <Image src={assets.linkedin_icon} alt="LinkedIn" className="w-6 brightness-0 invert hover:brightness-100" />
-        </a>
-      </div>
+          Software Engineer with a B.Sc. in Computer Science and Google Cloud PCA
+          certification. I design and build full-stack applications, cloud-native
+          infrastructure, and automated CI/CD pipelines — delivering reliable,
+          scalable systems from code to production.
+        </motion.p>
+
+        {/* CTA Buttons */}
+        <motion.div
+          variants={itemVariants}
+          className="mt-4 flex flex-col items-center gap-4 sm:flex-row"
+        >
+          <button
+            onClick={() => setIsContactOpen(true)}
+            className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] px-8 py-3 text-white font-medium hover:opacity-90 transition-opacity duration-300 cursor-pointer"
+          >
+            Get in Touch
+            <Image src={assets.right_arrow_white} alt="" className="w-4" />
+          </button>
+
+          <a
+            href="/Dori_Fourer.pdf"
+            download
+            className="flex items-center gap-2 rounded-full border border-white/20 px-8 py-3 text-[var(--text-secondary)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all duration-300"
+          >
+            Download Resume
+            <Image src={assets.download_icon} alt="" className="w-4 opacity-60" />
+          </a>
+        </motion.div>
+
+        {/* Social links */}
+        <motion.div variants={itemVariants} className="flex gap-4 mt-6">
+          {[
+            { href: "https://github.com/dori654", icon: assets.github_icon, label: "GitHub" },
+            { href: "https://linkedin.com/in/dori-fourer", icon: assets.linkedin_icon, label: "LinkedIn" },
+          ].map((social) => (
+            <motion.a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.1, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 hover:border-[var(--primary)] transition-colors duration-300"
+              aria-label={social.label}
+            >
+              <Image src={social.icon} alt={social.label} className="w-5 brightness-0 invert opacity-60" />
+            </motion.a>
+          ))}
+        </motion.div>
+      </motion.div>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </header>
   );
 };
+
 export default Header;
