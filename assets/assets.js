@@ -45,7 +45,7 @@ import grafana from "./Grafana.png";
 import terraform from "./HashiCorp Terraform.png";
 import jenkins from "./Jenkins.png";
 import kibana from "./Kibana.png";
-import kubernetes from "./kubernetes.png";
+import kubernetes from "./Kubernetes.png";
 import linux from "./Linux.png";
 import prometheus from "./Prometheus.png";
 import python from "./python.png";
@@ -114,59 +114,83 @@ export const assets = {
 
 export const workData = [
   {
-    title: "Cat Agency – Cloud-Native DevOps Project",
+    title: "Cat Agency - Cloud-Native DevOps Platform",
     description:
-      "End-to-end cloud-native system including application, infrastructure as code, and GitOps-based delivery. Built and operated as a production-like DevOps environment.",
+      "End-to-end cloud-native platform featuring Terraform-provisioned infrastructure on AWS & GCP, Kubernetes orchestration, CI/CD pipelines with GitHub Actions & ArgoCD, and full observability with Prometheus, Grafana, and ELK stack.",
     bgImage: "/Full_architecture.png",
+    techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana"],
+    slug: "cat-agency",
   },
   {
-    title: "Cat Agency – Infrastructure as Code (AWS & GCP)",
+    title: "Coming Soon",
     description:
-      "Provisioned cloud infrastructure using Terraform, including networking, compute, IAM, and managed Kubernetes clusters.",
-    bgImage: "/HashiCorp_Terraform.png",
-  },
-  {
-    title: "Cat Agency – CI/CD & GitOps",
-    description:
-      "Designed CI/CD pipelines and GitOps workflows to automate build, test, and deployment processes using modern DevOps practices.",
-    bgImage: "/k8s2.png",
-  },
-  {
-    title: "Cat Agency – Monitoring & Observability",
-    description:
-      "Implemented monitoring and logging using Prometheus, Grafana, and centralized logging to ensure system reliability and visibility.",
-    bgImage: "/work-monitoring.png",
+      "A new project is in the works. Stay tuned!",
+    bgImage: "",
+    techTags: [],
+    placeholder: true,
   },
 ];
 
+export const projectDetails = {
+  "cat-agency": {
+    title: "Cat Agency - Cloud-Native DevOps Platform",
+    subtitle: "End-to-end cloud-native system built with production-grade DevOps practices",
+    techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana", "ELK Stack", "Jenkins"],
+    overview:
+      "A comprehensive cloud-native platform designed and operated as a production-like DevOps environment. The project covers the full lifecycle — from application development and infrastructure provisioning to automated deployments and real-time monitoring.",
+    sections: [
+      {
+        title: "Architecture Overview",
+        description:
+          "The platform follows a microservices architecture deployed on Kubernetes clusters across AWS and GCP. The system includes containerized application services, a GitOps-based delivery pipeline, infrastructure as code, and a full observability stack.",
+        image: "/Full_architecture.png",
+      },
+      {
+        title: "Infrastructure as Code (AWS & GCP)",
+        description:
+          "Provisioned multi-cloud infrastructure using Terraform, including VPCs, subnets, security groups, IAM roles, compute instances, and managed Kubernetes clusters (EKS & GKE). Modular Terraform configurations enable repeatable, version-controlled infrastructure deployments.",
+        image: "/HashiCorp_Terraform.png",
+      },
+      {
+        title: "CI/CD & GitOps",
+        description:
+          "Designed CI/CD pipelines using GitHub Actions for build and test automation, and ArgoCD for GitOps-based continuous delivery to Kubernetes. The pipeline automates Docker image builds, vulnerability scanning, and rolling deployments with zero-downtime strategies.",
+        image: "/k8s2.png",
+      },
+      {
+        title: "Monitoring & Observability",
+        description:
+          "Implemented a full observability stack with Prometheus for metrics collection, Grafana for dashboards and alerting, and the ELK stack (Elasticsearch, Logstash, Kibana) for centralized logging. Custom dashboards provide real-time visibility into cluster health, application performance, and resource utilization.",
+        image: "/work-monitoring.png",
+      },
+    ],
+  },
+};
+
 export const serviceData = [
   {
-    icon: assets.kubernetes,
-    title: "Container Orchestration",
+    icon: assets.web_icon,
+    title: "Full-Stack Development",
     description:
-      "Hands-on experience designing and deploying Kubernetes clusters. Built and operated containerized microservices using Docker and Kubernetes with a focus on scalability and reliability.",
-    link: "",
-  },
-  {
-    icon: assets.githubActions,
-    title: "CI/CD Pipelines",
-    description:
-      "Designed and implemented CI/CD pipelines using GitHub Actions, Jenkins, and ArgoCD to automate build, test, and deployment workflows in project-based environments.",
-    link: "",
+      "Building modern web applications with React, Next.js, and Node.js. From responsive frontends to scalable backend APIs and database design.",
   },
   {
     icon: assets.googleCloud,
-    title: "Cloud Infrastructure & IaC",
+    title: "Cloud & Infrastructure",
     description:
-      "Implemented cloud infrastructure on AWS and GCP using Terraform and Ansible, including networking, compute, IAM, and managed Kubernetes services.",
-    link: "",
+      "Designing and provisioning cloud infrastructure on AWS and GCP using Terraform, including networking, compute, IAM, and managed Kubernetes services.",
   },
   {
-    icon: assets.prometheus,
-    title: "Monitoring & Observability",
+    icon: assets.kubernetes,
+    title: "DevOps & CI/CD",
     description:
-      "Implemented monitoring and logging solutions using Prometheus, Grafana, and ELK stack to gain system visibility and troubleshoot production-like environments.",
-    link: "",
+      "Containerizing applications with Docker, orchestrating with Kubernetes, and automating deployments through GitHub Actions, Jenkins, and ArgoCD pipelines.",
+  },
+  {
+    icon: assets.grafana,
+    title: "System Design & Monitoring",
+    description:
+      "Architecting scalable systems with observability built-in using Prometheus, Grafana, and ELK stack for reliability and performance insights.",
   },
 ];
 
@@ -174,20 +198,20 @@ export const infoList = [
   {
     icon: assets.code_icon,
     iconDark: assets.code_icon_dark,
-    title: "Core Technologies",
-    description: "Kubernetes, Docker, Terraform, Python, Bash",
+    title: "Languages",
+    description: "JavaScript, TypeScript, Python, Bash, SQL",
   },
   {
     icon: assets.edu_icon,
     iconDark: assets.edu_icon_dark,
-    title: "Cloud Platforms",
-    description: "AWS, GCP - Multi-cloud expertise",
+    title: "Cloud & DevOps",
+    description: "AWS, GCP, Kubernetes, Docker, Terraform",
   },
   {
     icon: assets.project_icon,
     iconDark: assets.project_icon_dark,
-    title: "CI/CD Tools",
-    description: "Jenkins, GitHub Actions, ArgoCD",
+    title: "Frameworks & Tools",
+    description: "React, Next.js, Node.js, Git, Linux",
   },
 ];
 
@@ -208,4 +232,38 @@ export const toolsData = [
   { icon: assets.grafana, name: "Grafana" },
   { icon: assets.prometheus, name: "Prometheus" },
   { icon: assets.kibana, name: "Kibana" },
+];
+
+export const techStackData = [
+  {
+    category: "Languages",
+    items: [
+      { icon: assets.python, name: "Python" },
+      { icon: assets.bash, name: "Bash" },
+    ],
+  },
+  {
+    category: "DevOps & Cloud",
+    items: [
+      { icon: assets.docker, name: "Docker" },
+      { icon: assets.kubernetes, name: "Kubernetes" },
+      { icon: assets.terraform, name: "Terraform" },
+      { icon: assets.AWS, name: "AWS" },
+      { icon: assets.googleCloud, name: "GCP" },
+      { icon: assets.jenkins, name: "Jenkins" },
+      { icon: assets.githubActions, name: "GitHub Actions" },
+      { icon: assets.argoCD, name: "ArgoCD" },
+    ],
+  },
+  {
+    category: "Monitoring & Tools",
+    items: [
+      { icon: assets.prometheus, name: "Prometheus" },
+      { icon: assets.grafana, name: "Grafana" },
+      { icon: assets.kibana, name: "Kibana" },
+      { icon: assets.git, name: "Git" },
+      { icon: assets.linux, name: "Linux" },
+      { icon: assets.vscode, name: "VS Code" },
+    ],
+  },
 ];

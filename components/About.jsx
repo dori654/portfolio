@@ -1,83 +1,81 @@
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { assets, infoList, toolsData } from "@/assets/assets";
+import { assets, infoList } from "@/assets/assets";
+import { motion, useInView } from "framer-motion";
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 function About() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section id="about" className="scroll-mt-20 w-full px-[5%] py-6 sm:px-[12%] sm:py-10">
-      {/* כותרות */}
-      <h4 className="mb-2 text-center text-base sm:text-lg font-Ovo text-[var(--devops-primary)]">Introduction</h4>
-      <h2 className="text-center text-3xl sm:text-5xl font-Ovo text-white">About me</h2>
+    <section id="about" className="scroll-mt-20 w-full px-[5%] py-16 sm:px-[12%] sm:py-20">
+      <motion.div
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={{ visible: { transition: { staggerChildren: 0.15 } } }}
+      >
+        {/* Section header */}
+        <motion.p variants={fadeInUp} className="mb-2 text-center text-sm font-Outfit text-[var(--primary)] tracking-widest uppercase">
+          Introduction
+        </motion.p>
+        <motion.h2 variants={fadeInUp} className="text-center text-3xl sm:text-5xl font-bold gradient-text mb-12">
+          About Me
+        </motion.h2>
 
-      {/* תוכן ראשי */}
-      <div className="my-10 sm:my-20 flex w-full flex-col items-center gap-10 sm:gap-20 lg:flex-row">
-        {/* תמונת משתמש */}
-        <div className="w-48 sm:w-64 md:w-80 rounded-3xl terminal-glow flex-shrink-0">
-          <Image
-            src={assets.MyPic}
-            alt="Portrait of the user"
-            className="w-full rounded-3xl border-2 border-[var(--devops-primary)]"
-          />
-        </div>
+        {/* Content */}
+        <div className="flex w-full flex-col items-center gap-12 lg:flex-row lg:gap-16">
+          {/* Image */}
+          <motion.div
+            variants={{ hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.7 } } }}
+            className="w-48 sm:w-64 md:w-80 flex-shrink-0"
+          >
+            <div className="rounded-2xl overflow-hidden glow-primary">
+              <Image
+                src={assets.MyPic}
+                alt="Dori Fourer"
+                className="w-full rounded-2xl"
+              />
+            </div>
+          </motion.div>
 
-        {/* טקסט תיאור */}
-        <div className="flex-1 w-full">
-          <p className="mb-8 sm:mb-10 text-sm sm:text-base font-Ovo text-gray-300">
-            DevOps Engineer based in Israel with a B.Sc. in Computer Science and a Google Cloud
-            Professional Cloud Architect (PCA) certification. Hands-on DevOps experience gained
-            through the Develeap DevOps Bootcamp, focusing on real-world infrastructure,
-            automation, and cloud-native systems. Experienced with Kubernetes, Docker, CI/CD
-            pipelines, and multi-cloud environments (AWS, GCP). Strong ability to design, deploy,
-            and operate production-like systems with an emphasis on scalability, reliability,
-            and automation.
-          </p>
+          {/* Text content */}
+          <motion.div
+            variants={{ hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0, transition: { duration: 0.7 } } }}
+            className="flex-1 w-full"
+          >
+            <p className="mb-10 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
+              Software Engineer based in Israel with a B.Sc. in Computer Science and a Google Cloud
+              Professional Cloud Architect (PCA) certification. I combine software development
+              expertise with deep DevOps knowledge — from building web applications with modern
+              frameworks to designing cloud infrastructure and automated pipelines. Experienced
+              with full-stack development, Kubernetes, Docker, CI/CD, and multi-cloud
+              environments (AWS, GCP).
+            </p>
 
-          {/* מידע נוסף */}
-          <ul className="grid w-full gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {infoList.map(({ icon, title, description }, index) => (
-              <li
-                key={index}
-                className="cursor-pointer rounded-xl border-2 border-[var(--devops-primary)] bg-[var(--devops-darker)] p-4 sm:p-6 duration-500 hover:-translate-y-1 hover:bg-[var(--devops-primary)] hover:bg-opacity-10 hover:shadow-[0_0_20px_rgba(79,209,197,0.3)]"
-              >
-                <Image src={icon} alt={title} className="mt-3 w-5 sm:w-7 brightness-0 invert" />
-                <h3 className="my-3 sm:my-4 text-sm sm:text-base text-[var(--devops-primary)] font-semibold">{title}</h3>
-                <p className="text-xs sm:text-sm text-gray-300">{description}</p>
-              </li>
-            ))}
-          </ul>
-
-          {/* כלים שאני משתמש */}
-          <h4 className="my-4 sm:my-6 text-base sm:text-lg font-Ovo text-white">Tools I use</h4>
-          <div className="flex flex-col gap-2 sm:gap-3">
-            <ul className="flex flex-wrap items-center gap-2 sm:gap-3">
-              {toolsData.slice(0, 8).map((tool, index) => (
-                <li
+            {/* Info cards */}
+            <ul className="grid w-full gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {infoList.map(({ icon, title, description }, index) => (
+                <motion.li
                   key={index}
-                  className="group relative flex aspect-square w-10 sm:w-12 items-center justify-center rounded-lg border-2 border-[var(--devops-primary)] bg-[var(--devops-darker)] cursor-pointer duration-500 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(79,209,197,0.5)]"
+                  variants={fadeInUp}
+                  whileHover={{ y: -4 }}
+                  className="glass glass-hover card-gradient-border cursor-pointer p-5 sm:p-6"
                 >
-                  <Image src={tool.icon} alt={tool.name} className="w-4 sm:w-7" />
-                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-[var(--devops-primary)] px-2 py-1 text-xs text-black opacity-0 transition-opacity group-hover:opacity-100 z-10">
-                    {tool.name}
-                  </span>
-                </li>
+                  <Image src={icon} alt={title} className="w-6 brightness-0 invert opacity-70" />
+                  <h3 className="my-3 text-sm sm:text-base text-[var(--primary)] font-semibold">{title}</h3>
+                  <p className="text-xs sm:text-sm text-[var(--text-secondary)]">{description}</p>
+                </motion.li>
               ))}
             </ul>
-            <ul className="flex flex-wrap items-center gap-2 sm:gap-3">
-              {toolsData.slice(8).map((tool, index) => (
-                <li
-                  key={index}
-                  className="group relative flex aspect-square w-10 sm:w-12 items-center justify-center rounded-lg border-2 border-[var(--devops-primary)] bg-[var(--devops-darker)] cursor-pointer duration-500 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(79,209,197,0.5)]"
-                >
-                  <Image src={tool.icon} alt={tool.name} className="w-4 sm:w-7" />
-                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-[var(--devops-primary)] px-2 py-1 text-xs text-black opacity-0 transition-opacity group-hover:opacity-100 z-10">
-                    {tool.name}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

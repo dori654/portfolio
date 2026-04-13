@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import emailjs from "@emailjs/browser";
-import { assets } from "@/assets/assets";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ContactModal = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState({
@@ -13,15 +12,12 @@ const ContactModal = ({ isOpen, onClose }) => {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    emailjs.init("BXAfglqoLN8T8ZIbJ"); 
+    emailjs.init("BXAfglqoLN8T8ZIbJ");
   }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -30,119 +26,131 @@ const ContactModal = ({ isOpen, onClose }) => {
     setStatus("");
 
     try {
-      await emailjs.send(
-        "service_clvu346", 
-        "template_kkao8s1", 
-        {
-          name: formData.name,
-          title: formData.email,
-          time: new Date().toLocaleString(),
-          email: formData.email,
-          message: formData.message,
-          to_email: "dori.fourer654@gmail.com", 
-        }
-      );
-      
-      setStatus("✓ Message sent successfully!");
+      await emailjs.send("service_clvu346", "template_kkao8s1", {
+        name: formData.name,
+        title: formData.email,
+        time: new Date().toLocaleString(),
+        email: formData.email,
+        message: formData.message,
+        to_email: "dori.fourer654@gmail.com",
+      });
+
+      setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-      
-      // Close modal after 2 seconds
       setTimeout(onClose, 2000);
     } catch (error) {
       console.error("Email error:", error);
-      setStatus("✗ Failed to send. Please try again.");
+      setStatus("error");
     } finally {
       setLoading(false);
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="relative bg-[var(--devops-darker)] rounded-lg border-2 border-[var(--devops-primary)] p-6 sm:p-8 max-w-md w-full">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute -top-3 -right-3 w-8 h-8 flex items-center justify-center rounded-full bg-[var(--devops-primary)] text-[var(--devops-dark)] hover:bg-opacity-90 transition-all duration-300 font-bold text-lg"
-          aria-label="Close modal"
-        >
-          ✕
-        </button>
+    <AnimatePresence>
+      {isOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
 
-        {/* Title */}
-        <h2 className="text-2xl sm:text-3xl font-Ovo text-[var(--devops-primary)] mb-4">Get In Touch</h2>
-        <p className="text-gray-300 text-sm sm:text-base mb-6 font-Ovo">Have a question or want to work together? I'd love to hear from you!</p>
-
-        {/* Status Message */}
-        {status && (
-          <div className={`mb-4 p-3 rounded-lg text-sm font-Ovo ${
-            status.includes("✓") 
-              ? "bg-green-900 text-green-200" 
-              : "bg-red-900 text-red-200"
-          }`}>
-            {status}
-          </div>
-        )}
-
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name Input */}
-          <div>
-            <label className="block text-gray-300 text-sm font-Ovo mb-2">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-2 rounded-lg bg-[var(--devops-dark)] border-2 border-[var(--devops-primary)] text-white font-Ovo focus:outline-none focus:shadow-[0_0_15px_rgba(79,209,197,0.5)] transition-shadow disabled:opacity-50"
-              placeholder="Your Name"
-            />
-          </div>
-
-          {/* Email Input */}
-          <div>
-            <label className="block text-gray-300 text-sm font-Ovo mb-2">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              className="w-full px-4 py-2 rounded-lg bg-[var(--devops-dark)] border-2 border-[var(--devops-primary)] text-white font-Ovo focus:outline-none focus:shadow-[0_0_15px_rgba(79,209,197,0.5)] transition-shadow disabled:opacity-50"
-              placeholder="your@email.com"
-            />
-          </div>
-
-          {/* Message Input */}
-          <div>
-            <label className="block text-gray-300 text-sm font-Ovo mb-2">Message</label>
-            <textarea
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-              disabled={loading}
-              rows="4"
-              className="w-full px-4 py-2 rounded-lg bg-[var(--devops-dark)] border-2 border-[var(--devops-primary)] text-white font-Ovo focus:outline-none focus:shadow-[0_0_15px_rgba(79,209,197,0.5)] transition-shadow resize-none disabled:opacity-50"
-              placeholder="Your message..."
-            />
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full px-6 py-3 rounded-full bg-[var(--devops-primary)] text-[var(--devops-dark)] font-semibold hover:bg-opacity-90 transition-all duration-300 mt-6 font-Ovo disabled:opacity-50 disabled:cursor-not-allowed"
+          {/* Modal */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative glass p-6 sm:p-8 max-w-md w-full"
+            style={{ backdropFilter: "blur(24px)" }}
           >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-      </div>
-    </div>
+            {/* Close */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-white transition-all duration-300 text-lg cursor-pointer"
+              aria-label="Close modal"
+            >
+              &times;
+            </button>
+
+            <h2 className="text-2xl sm:text-3xl font-bold gradient-text mb-2">Get In Touch</h2>
+            <p className="text-[var(--text-secondary)] text-sm mb-6">
+              Have a question or want to work together? I'd love to hear from you.
+            </p>
+
+            {/* Status */}
+            {status && (
+              <div
+                className={`mb-4 p-3 rounded-lg text-sm ${
+                  status === "success"
+                    ? "bg-emerald-900/50 text-emerald-300 border border-emerald-500/20"
+                    : "bg-red-900/50 text-red-300 border border-red-500/20"
+                }`}
+              >
+                {status === "success" ? "Message sent successfully!" : "Failed to send. Please try again."}
+              </div>
+            )}
+
+            {/* Form */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-[var(--text-secondary)] text-sm mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors disabled:opacity-50"
+                  placeholder="Your Name"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[var(--text-secondary)] text-sm mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors disabled:opacity-50"
+                  placeholder="your@email.com"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[var(--text-secondary)] text-sm mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  disabled={loading}
+                  rows="4"
+                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors resize-none disabled:opacity-50"
+                  placeholder="Your message..."
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] text-white font-medium hover:opacity-90 transition-opacity duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+              >
+                {loading ? "Sending..." : "Send Message"}
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 };
 
