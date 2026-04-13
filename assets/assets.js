@@ -45,7 +45,7 @@ import grafana from "./Grafana.png";
 import terraform from "./HashiCorp Terraform.png";
 import jenkins from "./Jenkins.png";
 import kibana from "./Kibana.png";
-import kubernetes from "./Kubernetes.png";
+import kubernetes from "./kubernetes.png";
 import linux from "./Linux.png";
 import prometheus from "./Prometheus.png";
 import python from "./python.png";
