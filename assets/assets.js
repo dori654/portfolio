@@ -53,6 +53,7 @@ import full_arc_cat_agency from "./Full_architecture.png";
 import MyPic from "./mypic.jpeg";
 import linkedin_icon from "./linkedin.png";
 import github_icon from "./github.png";
+import javaScript from "./javascript.png";
 
 export const assets = {
   user_image,
@@ -110,6 +111,7 @@ export const assets = {
   MyPic,
   linkedin_icon,
   github_icon,
+  javaScript,
 };
 
 export const workData = [
@@ -240,6 +242,8 @@ export const techStackData = [
     items: [
       { icon: assets.python, name: "Python" },
       { icon: assets.bash, name: "Bash" },
+      { icon: assets.javaScript, name: "JavaScript" },
+      
     ],
   },
   {
