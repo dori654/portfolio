@@ -77,58 +77,59 @@ const Navbar = () => {
           </button>
         </div>
 
-        <AnimatePresence>
-          {isMobileOpen && (
-            <>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+      </motion.nav>
+
+      <AnimatePresence>
+        {isMobileOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+              onClick={() => setIsMobileOpen(false)}
+            />
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 bottom-0 w-72 z-50 glass py-20 px-8 flex flex-col gap-6"
+              style={{ borderRadius: "1rem 0 0 1rem" }}
+            >
+              <button
                 onClick={() => setIsMobileOpen(false)}
-              />
-              <motion.div
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "100%" }}
-                transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                className="fixed right-0 top-0 bottom-0 w-72 z-50 glass py-20 px-8 flex flex-col gap-6"
-                style={{ borderRadius: "1rem 0 0 1rem" }}
+                className="absolute right-6 top-6"
+                aria-label="Close Menu"
               >
-                <button
-                  onClick={() => setIsMobileOpen(false)}
-                  className="absolute right-6 top-6"
-                  aria-label="Close Menu"
-                >
-                  <Image src={assets.close_black} alt="Close" className="w-5 brightness-0 invert" />
-                </button>
-                {navLinks.map((link, i) => (
-                  <motion.a
-                    key={link.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg"
-                    href={link.href}
-                    onClick={() => setIsMobileOpen(false)}
-                  >
-                    {link.label}
-                  </motion.a>
-                ))}
-                <motion.button
+                <Image src={assets.close_black} alt="Close" className="w-5 brightness-0 invert" />
+              </button>
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.label}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: navLinks.length * 0.05 }}
-                  onClick={() => { setIsContactOpen(true); setIsMobileOpen(false); }}
-                  className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg text-left bg-transparent border-none p-0 cursor-pointer"
+                  transition={{ delay: i * 0.05 }}
+                  className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg"
+                  href={link.href}
+                  onClick={() => setIsMobileOpen(false)}
                 >
-                  Contact
-                </motion.button>
-              </motion.div>
-            </>
-          )}
-        </AnimatePresence>
-      </motion.nav>
+                  {link.label}
+                </motion.a>
+              ))}
+              <motion.button
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.05 }}
+                onClick={() => { setIsContactOpen(true); setIsMobileOpen(false); }}
+                className="font-Outfit text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors text-lg text-left bg-transparent border-none p-0 cursor-pointer"
+              >
+                Contact
+              </motion.button>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </>
