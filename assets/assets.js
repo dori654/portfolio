@@ -45,7 +45,7 @@ import grafana from "./Grafana.png";
 import terraform from "./HashiCorp Terraform.png";
 import jenkins from "./Jenkins.png";
 import kibana from "./Kibana.png";
-import kubernetes from "./Kubernetes.png";
+import kubernetes from "./kubernetes.png";
 import linux from "./Linux.png";
 import prometheus from "./Prometheus.png";
 import python from "./python.png";
@@ -123,6 +123,13 @@ export const workData = [
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana"],
     slug: "cat-agency",
   },
+    {
+    title: "Movihoot - Movie Recommendation Engine",
+    description:
+      "A Kahoot-style group movie selection app where friends join a session, vote on AI-curated movie suggestions in real time, and finally agree on what to watch. Built with NestJS, React, Socket.io, Firebase, and the Claude API.",    bgImage: "/movihoot-images/host-1.jpeg",
+    techTags: ["React", "NestJS", "Firebase", "Socket.io", "Claude API", "TMDB API", "Docker", "GitHub Actions"],
+    slug: "movihoot",
+  },
   {
     title: "Coming Soon",
     description:
@@ -167,6 +174,38 @@ export const projectDetails = {
       },
     ],
   },
+  "movihoot": {
+  title: "Movihoot - Group Movie Night Decider",
+  subtitle: "Real-time multiplayer app that helps friend groups agree on what to watch",
+  techTags: ["React", "NestJS", "Firebase", "Socket.io", "Claude API", "TMDB API", "Docker", "GitHub Actions"],
+  overview:
+    "Movihoot is a Kahoot-style group movie selection app where a host creates a session, friends join via code, and everyone votes on movies in real time. Claude AI powers smart movie recommendations based on group preferences, while TMDB provides rich movie metadata.",
+  sections: [
+    {
+      title: "How It Works",
+      description:
+        "A host creates a room and shares a join code. Participants answer a short preference questionnaire, and Claude generates a tailored movie shortlist for the group. Players then vote in real-time Kahoot-style rounds until a winner is chosen — making movie night decisions fun instead of painful.",
+      image: "/movihoot-images/host-1.jpeg",
+    },
+    {
+      title: "Real-Time Architecture",
+      description:
+        "Built on NestJS with Socket.io for bidirectional real-time communication between all session participants. Firebase handles session state persistence, ensuring players can rejoin seamlessly and the host maintains full control over the game flow.",
+      image: "/movihoot-images/parti-join.jpeg",
+    },
+    {
+      title: "AI-Powered Recommendations",
+      description:
+        "Claude API analyzes the group's collective preferences — genres, moods, languages, and viewing history — to generate a curated shortlist from the TMDB catalog. The recommendations balance individual tastes with group overlap, surfacing movies everyone is likely to enjoy.",
+      image: "/movihoot-images/results.jpeg",
+    },
+    {
+      title: "CI/CD Pipeline",
+      description:
+        "GitHub Actions handles automated builds and Docker image publishing on every push to main. The containerized NestJS backend and React frontend are independently deployable, with environment-specific configs managed via Docker Compose.",
+    },
+  ],
+},
 };
 
 export const serviceData = [

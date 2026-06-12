@@ -72,7 +72,7 @@ const Footer = () => {
       {/* Bottom bar */}
       <div className="h-px w-full bg-white/5 mb-6" />
       <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[var(--text-secondary)]">
-        <p>&copy; 2025 Dori Fourer. All rights reserved.</p>
+        <p>&copy; 2026 Dori Fourer. All rights reserved.</p>
         <p>Built with Next.js & Tailwind CSS</p>
       </div>
     </footer>
