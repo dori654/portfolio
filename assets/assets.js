@@ -122,6 +122,16 @@ export const workData = [
     bgImage: "/Full_architecture.png",
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana"],
     slug: "cat-agency",
+    github: "https://github.com/dori654/Cat-Agency-App",
+  },
+  {
+    title: "AI Drone Surveillance",
+    description:
+      "Drone surveillance system designed to revolutionize the way we approach security and monitoring tasks.",    bgImage: "/zeusvision-images/zeusvision.jpg",
+    techTags: ["Python", "Django", "Real Time", "Object Detection", "DJI MSDK"],
+    slug: "zeusvision",
+    link: "https://youtu.be/hUxDe4Vgb9U?si=E2dynK2b8nZNKavK",
+    github: "https://github.com/dori654/ZeusVision",
   },
     {
     title: "Movihoot - Movie Recommendation Engine",
@@ -129,6 +139,7 @@ export const workData = [
       "A Kahoot-style group movie selection app where friends join a session, vote on AI-curated movie suggestions in real time, and finally agree on what to watch. Built with NestJS, React, Socket.io, Firebase, and the Claude API.",    bgImage: "/movihoot-images/host-1.jpeg",
     techTags: ["React", "NestJS", "Firebase", "Socket.io", "Claude API", "TMDB API", "Docker", "GitHub Actions"],
     slug: "movihoot",
+    link: "https://github.com/dori654/Movihoot",
   },
   {
     title: "Coming Soon",
@@ -171,6 +182,31 @@ export const projectDetails = {
         description:
           "Implemented a full observability stack with Prometheus for metrics collection, Grafana for dashboards and alerting, and the ELK stack (Elasticsearch, Logstash, Kibana) for centralized logging. Custom dashboards provide real-time visibility into cluster health, application performance, and resource utilization.",
         image: "/work-monitoring.png",
+      },
+    ],
+  },
+
+  "zeusvision": {
+    title: "AI Drone Surveillance",
+    subtitle: "Drone surveillance system designed to revolutionize security and monitoring tasks",
+    techTags: ["Python", "Django", "Real Time", "Object Detection", "DJI MSDK"],
+    overview:
+      "ZeusVision is an AI-powered drone surveillance system that leverages real-time object detection and tracking to enhance security operations. The system integrates with DJI drones and provides a web-based interface for monitoring and controlling drone flights.",
+    sections: [
+      {
+        title: "Real-Time Object Detection",
+        description:
+          "The system uses a deep learning model for real-time object detection, allowing drones to identify and track objects of interest during flight. The model is optimized for performance on edge devices, ensuring low latency and high accuracy.",
+        image: "/zeusvision-images/zeusvision.jpg",
+      },
+      {
+        title: "Web-Based Control Interface",
+        description:
+          "A Django-based web application provides a user-friendly interface for controlling drone operations, viewing live video feeds, and accessing detected object data. The interface supports multiple users and role-based access control.",
+        image: "/zeusvision-images/web-interface.png",
+      },
+      {
+        image: "/zeusvision-images/uidashborad.png",
       },
     ],
   },
