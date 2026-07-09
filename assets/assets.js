@@ -139,7 +139,15 @@ export const workData = [
       "A Kahoot-style group movie selection app where friends join a session, vote on AI-curated movie suggestions in real time, and finally agree on what to watch. Built with NestJS, React, Socket.io, Firebase, and the Claude API.",    bgImage: "/movihoot-images/host-1.jpeg",
     techTags: ["React", "NestJS", "Firebase", "Socket.io", "Claude API", "TMDB API", "Docker", "GitHub Actions"],
     slug: "movihoot",
-    link: "https://github.com/dori654/Movihoot",
+    github: "https://github.com/dori654/Movihoot",
+  },
+      {
+    title: "Leaderteam - NDT company website ",
+    description:
+      "A modern, responsive website for Leaderteam, showcasing their services and solutions with multiple language support.",    bgImage: "/leaderteam-images/1bg.jpeg",
+    techTags: ["React", "Vite", "JavaScript", "Tailwind CSS"],
+    slug: "leaderteam",
+    link: "https://lt-site-seven.vercel.app",
   },
   {
     title: "Coming Soon",
