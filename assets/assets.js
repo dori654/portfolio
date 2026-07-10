@@ -171,25 +171,25 @@ export const projectDetails = {
         title: "Architecture Overview",
         description:
           "The platform follows a microservices architecture deployed on Kubernetes clusters across AWS and GCP. The system includes containerized application services, a GitOps-based delivery pipeline, infrastructure as code, and a full observability stack.",
-        image: "/Full_architecture.png",
+        image: "/catagency-images/Full_architecture.png",
       },
       {
         title: "Infrastructure as Code (AWS & GCP)",
         description:
           "Provisioned multi-cloud infrastructure using Terraform, including VPCs, subnets, security groups, IAM roles, compute instances, and managed Kubernetes clusters (EKS & GKE). Modular Terraform configurations enable repeatable, version-controlled infrastructure deployments.",
-        image: "/HashiCorp_Terraform.png",
+        image: "/catagency-images/HashiCorp_Terraform.png",
       },
       {
         title: "CI/CD & GitOps",
         description:
           "Designed CI/CD pipelines using GitHub Actions for build and test automation, and ArgoCD for GitOps-based continuous delivery to Kubernetes. The pipeline automates Docker image builds, vulnerability scanning, and rolling deployments with zero-downtime strategies.",
-        image: "/k8s2.png",
+        image: "/catagency-images/k8s2.png",
       },
       {
         title: "Monitoring & Observability",
         description:
           "Implemented a full observability stack with Prometheus for metrics collection, Grafana for dashboards and alerting, and the ELK stack (Elasticsearch, Logstash, Kibana) for centralized logging. Custom dashboards provide real-time visibility into cluster health, application performance, and resource utilization.",
-        image: "/work-monitoring.png",
+        image: "/catagency-images/work-monitoring.png",
       },
     ],
   },
