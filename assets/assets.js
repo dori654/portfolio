@@ -267,6 +267,7 @@ leaderteam:{
         title: "Multi-Language Support",
         description:
           "Implemented internationalization (i18n) to support multiple languages, allowing users to switch between English and Hebrew. This enhances accessibility for a global audience.",
+          image: "/leaderteam-images/2bg.jpeg",
       },
     ],
 },
