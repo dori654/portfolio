@@ -116,9 +116,17 @@ export const assets = {
 
 export const workData = [
   {
-    title: "Cat Agency - Cloud-Native DevOps Platform",
+    title: "Leaderteam - NDT company website ",
     description:
-      "End-to-end cloud-native platform featuring Terraform-provisioned infrastructure on AWS & GCP, Kubernetes orchestration, CI/CD pipelines with GitHub Actions & ArgoCD, and full observability with Prometheus, Grafana, and ELK stack.",
+      "A modern, responsive website for Leaderteam, showcasing their services and solutions with multiple language support.",    bgImage: "/leaderteam-images/1bg.jpeg",
+    techTags: ["React", "Vite", "JavaScript", "Tailwind CSS"],
+    slug: "leaderteam",
+    link: "https://lt-site-seven.vercel.app",
+  },
+  {
+    title: "Cloud-Native DevOps Platform",
+    description:
+      "End-to-end cloud-native multirepo platform featuring Terraform-provisioned infrastructure on AWS & GCP, Kubernetes orchestration, CI/CD pipelines with GitHub Actions & ArgoCD, and full observability with Prometheus, Grafana, and ELK stack.",
     bgImage: "/Full_architecture.png",
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana"],
     slug: "cat-agency",
@@ -133,21 +141,13 @@ export const workData = [
     link: "https://youtu.be/hUxDe4Vgb9U?si=E2dynK2b8nZNKavK",
     github: "https://github.com/dori654/ZeusVision",
   },
-    {
+  {
     title: "Movihoot - Movie Recommendation Engine",
     description:
       "A Kahoot-style group movie selection app where friends join a session, vote on AI-curated movie suggestions in real time, and finally agree on what to watch. Built with NestJS, React, Socket.io, Firebase, and the Claude API.",    bgImage: "/movihoot-images/host-1.jpeg",
     techTags: ["React", "NestJS", "Firebase", "Socket.io", "Claude API", "TMDB API", "Docker", "GitHub Actions"],
     slug: "movihoot",
     github: "https://github.com/dori654/Movihoot",
-  },
-      {
-    title: "Leaderteam - NDT company website ",
-    description:
-      "A modern, responsive website for Leaderteam, showcasing their services and solutions with multiple language support.",    bgImage: "/leaderteam-images/1bg.jpeg",
-    techTags: ["React", "Vite", "JavaScript", "Tailwind CSS"],
-    slug: "leaderteam",
-    link: "https://lt-site-seven.vercel.app",
   },
   {
     title: "Coming Soon",
@@ -161,7 +161,7 @@ export const workData = [
 
 export const projectDetails = {
   "cat-agency": {
-    title: "Cat Agency - Cloud-Native DevOps Platform",
+    title: "Cloud-Native DevOps Platform",
     subtitle: "End-to-end cloud-native system built with production-grade DevOps practices",
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana", "ELK Stack", "Jenkins"],
     overview:
@@ -249,6 +249,26 @@ export const projectDetails = {
         "GitHub Actions handles automated builds and Docker image publishing on every push to main. The containerized NestJS backend and React frontend are independently deployable, with environment-specific configs managed via Docker Compose.",
     },
   ],
+},
+leaderteam:{
+    title: "Leaderteam - NDT company website",
+    subtitle: "A modern, responsive website for Leaderteam showcasing their services and solutions",
+    techTags: ["React", "Vite", "JavaScript", "Tailwind CSS"],
+    overview:
+      "A sleek, responsive website built for Leaderteam, a company specializing in Non-Destructive Testing (NDT) services. The site features multiple language support, service showcases, and a contact form for inquiries.",
+    sections: [
+      {
+        title: "Responsive Design",
+        description:
+          "The website is built with a mobile-first approach using Tailwind CSS, ensuring optimal viewing across devices. The layout adapts seamlessly from desktop to tablet to mobile, providing a consistent user experience.",
+        image: "/leaderteam-images/1bg.jpeg",
+      },
+      {
+        title: "Multi-Language Support",
+        description:
+          "Implemented internationalization (i18n) to support multiple languages, allowing users to switch between English and Hebrew. This enhances accessibility for a global audience.",
+      },
+    ],
 },
 };
 
