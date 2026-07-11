@@ -69,11 +69,15 @@ const Navbar = () => {
           </button>
 
           <button
-            className="block md:hidden"
-            onClick={() => setIsMobileOpen(true)}
-            aria-label="Open Menu"
+            className="block md:hidden relative z-[60]"
+            onClick={() => setIsMobileOpen((prev) => !prev)}
+            aria-label={isMobileOpen ? "Close Menu" : "Open Menu"}
           >
-            <Image src={assets.menu_black} alt="Menu" className="w-6 brightness-0 invert" />
+            <Image
+              src={isMobileOpen ? assets.close_black : assets.menu_black}
+              alt=""
+              className="w-6 brightness-0 invert"
+            />
           </button>
         </div>
 
@@ -97,13 +101,6 @@ const Navbar = () => {
               className="fixed right-0 top-0 bottom-0 w-72 z-50 glass py-20 px-8 flex flex-col gap-6"
               style={{ borderRadius: "1rem 0 0 1rem" }}
             >
-              <button
-                onClick={() => setIsMobileOpen(false)}
-                className="absolute right-6 top-6"
-                aria-label="Close Menu"
-              >
-                <Image src={assets.close_black} alt="Close" className="w-5 brightness-0 invert" />
-              </button>
               {navLinks.map((link, i) => (
                 <motion.a
                   key={link.label}
