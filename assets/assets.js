@@ -127,7 +127,7 @@ export const workData = [
     title: "Cloud-Native DevOps Platform",
     description:
       "End-to-end cloud-native multirepo platform featuring Terraform-provisioned infrastructure on AWS & GCP, Kubernetes orchestration, CI/CD pipelines with GitHub Actions & ArgoCD, and full observability with Prometheus, Grafana, and ELK stack.",
-    bgImage: "/Full_architecture.png",
+    bgImage: "/catagency-images/Full_architecture.png",
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana"],
     slug: "cat-agency",
     github: "https://github.com/dori654/Cat-Agency-App",
