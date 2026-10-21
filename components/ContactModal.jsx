@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { motion, AnimatePresence } from "framer-motion";
@@ -65,20 +66,22 @@ const ContactModal = ({ isOpen, onClose }) => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative glass p-6 sm:p-8 max-w-md w-full"
-            style={{ backdropFilter: "blur(24px)" }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="contact-title"
+            className="bento relative p-6 sm:p-8 max-w-md w-full"
           >
             {/* Close */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/10 text-[var(--text-secondary)] hover:text-white transition-all duration-300 text-lg cursor-pointer"
+              className="icon-btn absolute top-3 right-3 text-xl"
               aria-label="Close modal"
             >
               &times;
             </button>
 
-            <h2 className="text-2xl sm:text-3xl font-bold gradient-text mb-2">Get In Touch</h2>
-            <p className="text-[var(--text-secondary)] text-sm mb-6">
+            <h2 id="contact-title" className="f-display text-2xl sm:text-3xl font-bold mb-2">Get In Touch</h2>
+            <p className="text-[var(--muted)] text-sm mb-6">
               Have a question or want to work together? I'd love to hear from you.
             </p>
 
@@ -87,8 +90,8 @@ const ContactModal = ({ isOpen, onClose }) => {
               <div
                 className={`mb-4 p-3 rounded-lg text-sm ${
                   status === "success"
-                    ? "bg-emerald-900/50 text-emerald-300 border border-emerald-500/20"
-                    : "bg-red-900/50 text-red-300 border border-red-500/20"
+                    ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/30"
+                    : "bg-red-500/10 text-red-600 border border-red-500/30"
                 }`}
               >
                 {status === "success" ? "Message sent successfully!" : "Failed to send. Please try again."}
@@ -98,43 +101,46 @@ const ContactModal = ({ isOpen, onClose }) => {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-[var(--text-secondary)] text-sm mb-2">Name</label>
+                <label htmlFor="contact-name" className="block text-[var(--muted)] text-sm mb-2">Name</label>
                 <input
                   type="text"
+                  id="contact-name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors disabled:opacity-50"
+                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50"
                   placeholder="Your Name"
                 />
               </div>
 
               <div>
-                <label className="block text-[var(--text-secondary)] text-sm mb-2">Email</label>
+                <label htmlFor="contact-email" className="block text-[var(--muted)] text-sm mb-2">Email</label>
                 <input
                   type="email"
+                  id="contact-email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors disabled:opacity-50"
+                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50"
                   placeholder="your@email.com"
                 />
               </div>
 
               <div>
-                <label className="block text-[var(--text-secondary)] text-sm mb-2">Message</label>
+                <label htmlFor="contact-message" className="block text-[var(--muted)] text-sm mb-2">Message</label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   disabled={loading}
                   rows="4"
-                  className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[var(--primary)] transition-colors resize-none disabled:opacity-50"
+                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors resize-none disabled:opacity-50"
                   placeholder="Your message..."
                 />
               </div>
@@ -142,7 +148,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] text-white font-medium hover:opacity-90 transition-opacity duration-300 mt-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                className="btn btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? "Sending..." : "Send Message"}
               </button>

@@ -340,6 +340,30 @@ export const toolsData = [
   { icon: assets.kibana, name: "Kibana" },
 ];
 
+export const experienceData = [
+  {
+    role: "Software Developer",
+    company: "Govo",
+    period: "Present",
+    points: [
+      "Developing software and owning products end to end — from building to marketing and product management.",
+      "Building marketing and workflow automations.",
+      "Creating AI video-generation workflows with n8n.",
+      "Integrating third-party APIs to gather data and generate content.",
+    ],
+  },
+  {
+    role: "Backend Developer Intern",
+    company: "Bridgify",
+    period: "2023",
+    points: [
+      "Tested and validated REST APIs using Postman, including edge cases and failure scenarios.",
+      "Improved system reliability through structured API testing and analysis.",
+      "Collaborated with development teams to identify and resolve backend issues.",
+    ],
+  },
+];
+
 export const techStackData = [
   {
     category: "Languages",
@@ -361,6 +385,17 @@ export const techStackData = [
       { icon: assets.jenkins, name: "Jenkins" },
       { icon: assets.githubActions, name: "GitHub Actions" },
       { icon: assets.argoCD, name: "ArgoCD" },
+    ],
+  },
+  {
+    category: "AI-Assisted Development",
+    highlight: true,
+    items: [
+      { name: "Claude Code" },
+      { name: "Claude API" },
+      { name: "LangChain" },
+      { name: "Supabase" },
+      { name: "n8n" },
     ],
   },
   {

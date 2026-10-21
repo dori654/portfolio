@@ -1,79 +1,52 @@
+"use client";
 import React from "react";
-import Image from "next/image";
-import { assets } from "@/assets/assets";
-import { motion } from "framer-motion";
+import { Reveal, GithubIcon, LinkedinIcon, ArrowIcon } from "./ui";
 
-const Footer = () => {
-  const links = [
-    { label: "Home", href: "#top" },
-    { label: "About", href: "#about" },
-    { label: "Tech Stack", href: "#techstack" },
-    { label: "Expertise", href: "#services" },
-    { label: "Projects", href: "#work" },
-  ];
+const links = [
+  { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
+  { label: "Stack", href: "#techstack" },
+  { label: "Expertise", href: "#services" },
+  { label: "Projects", href: "#work" },
+];
 
-  const socials = [
-    { href: "https://github.com/dori654", icon: assets.github_icon, label: "GitHub" },
-    { href: "https://linkedin.com/in/dori-fourer", icon: assets.linkedin_icon, label: "LinkedIn" },
-  ];
-
+const Footer = ({ onContact }) => {
   return (
-    <footer className="w-full px-[5%] sm:px-[12%] pt-16 pb-8">
-      {/* Gradient line */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--primary)] to-transparent mb-12 opacity-30" />
-
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 mb-12">
-        {/* Brand */}
+    <footer className="mx-auto w-full max-w-6xl px-5 pt-10 pb-8">
+      <Reveal className="bento bento-accent dots flex flex-col items-start justify-between gap-8 p-8 sm:p-12 md:flex-row md:items-end">
         <div>
-          <h3 className="text-xl font-bold gradient-text-alt mb-3">Dori Fourer</h3>
-          <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-            Software Engineer building scalable systems from frontend to infrastructure.
-          </p>
+          <p className="eyebrow mb-4">Contact</p>
+          <h2 className="f-display text-4xl sm:text-6xl font-bold leading-tight">
+            Let&apos;s build
+            <br />
+            something<span className="text-[var(--accent)]">.</span>
+          </h2>
         </div>
+        <button onClick={onContact} className="btn btn-primary">
+          Get in touch
+          <ArrowIcon />
+        </button>
+      </Reveal>
 
-        {/* Quick links */}
-        <div>
-          <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Quick Links</h4>
-          <ul className="space-y-2">
-            {links.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="text-sm text-[var(--text-secondary)] hover:text-[var(--primary)] transition-colors duration-300"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Social */}
-        <div>
-          <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">Connect</h4>
-          <div className="flex gap-3">
-            {socials.map((social) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ y: -3 }}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 hover:border-[var(--primary)] transition-colors duration-300"
-                aria-label={social.label}
-              >
-                <Image src={social.icon} alt={social.label} className="w-4 brightness-0 invert opacity-60" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom bar */}
-      <div className="h-px w-full bg-white/5 mb-6" />
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-[var(--text-secondary)]">
+      <div className="mt-6 flex flex-col items-center justify-between gap-4 text-sm text-[var(--muted)] md:flex-row">
         <p>&copy; 2026 Dori Fourer. All rights reserved.</p>
-        <p>Built with Next.js & Tailwind CSS</p>
+        <ul className="flex flex-wrap justify-center gap-x-5 gap-y-1">
+          {links.map((link) => (
+            <li key={link.label}>
+              <a href={link.href} className="hover:text-[var(--accent)] transition-colors">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="flex gap-2">
+          <a href="https://github.com/dori654" target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="GitHub">
+            <GithubIcon size={18} />
+          </a>
+          <a href="https://linkedin.com/in/dori-fourer" target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="LinkedIn">
+            <LinkedinIcon size={18} />
+          </a>
+        </div>
       </div>
     </footer>
   );
