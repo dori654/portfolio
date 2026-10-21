@@ -1,8 +1,9 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
 import { motion } from "framer-motion";
-import ContactModal from "./ContactModal";
+import { GithubIcon, LinkedinIcon, ArrowIcon, DownloadIcon } from "./ui";
 
 const roles = [
   "Software Engineer",
@@ -11,141 +12,141 @@ const roles = [
   "Cloud Architect",
 ];
 
-const containerVariants = {
+const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
-export const Header = () => {
-  const [isContactOpen, setIsContactOpen] = useState(false);
+export const Header = ({ onContact }) => {
   const [roleIndex, setRoleIndex] = useState(0);
-  const [displayText, setDisplayText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [displayText, setDisplayText] = useState(roles[0]);
+  const [isDeleting, setIsDeleting] = useState(true);
+  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, []);
+
+  useEffect(() => {
+    if (reduced) return;
     const currentRole = roles[roleIndex];
     let timeout;
 
     if (!isDeleting && displayText === currentRole) {
-      timeout = setTimeout(() => setIsDeleting(true), 2000);
+      timeout = setTimeout(() => setIsDeleting(true), 2200);
     } else if (isDeleting && displayText === "") {
       setIsDeleting(false);
       setRoleIndex((prev) => (prev + 1) % roles.length);
     } else if (isDeleting) {
-      timeout = setTimeout(() => setDisplayText((prev) => prev.slice(0, -1)), 40);
+      timeout = setTimeout(() => setDisplayText((prev) => prev.slice(0, -1)), 35);
     } else {
-      timeout = setTimeout(
-        () => setDisplayText(currentRole.slice(0, displayText.length + 1)),
-        80
-      );
+      timeout = setTimeout(() => setDisplayText(currentRole.slice(0, displayText.length + 1)), 70);
     }
 
     return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, roleIndex]);
+  }, [displayText, isDeleting, roleIndex, reduced]);
 
   return (
-    <header className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-4 py-12 sm:py-0">
-      {/* Animated gradient blobs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="hero-blob-1 absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[var(--primary)] opacity-[0.07] blur-[120px]" />
-        <div className="hero-blob-2 absolute top-1/3 right-1/4 w-[400px] h-[400px] rounded-full bg-[var(--secondary)] opacity-[0.07] blur-[120px]" />
-        <div className="hero-blob-3 absolute bottom-1/4 left-1/3 w-[350px] h-[350px] rounded-full bg-[var(--accent)] opacity-[0.05] blur-[120px]" />
-      </div>
-
+    <section id="top" className="mx-auto w-full max-w-6xl px-5 pt-28 sm:pt-32">
       <motion.div
-        variants={containerVariants}
+        variants={container}
         initial="hidden"
         animate="visible"
-        className="relative z-10 flex flex-col items-center gap-6"
+        className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4"
       >
-        {/* Name + role */}
-        <motion.p
-          variants={itemVariants}
-          className="text-[var(--text-secondary)] text-base sm:text-lg tracking-widest uppercase font-Outfit"
-        >
-          Dori Fourer
-        </motion.p>
-
-        {/* Typing role - large hero text */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-7xl lg:text-8xl font-bold text-white text-center leading-tight"
-        >
-          <span className="gradient-text">{displayText}</span>
-          <span className="typing-cursor text-[var(--primary)]">|</span>
-        </motion.h1>
-
-        {/* Subtitle */}
-        <motion.p
-          variants={itemVariants}
-          className="text-[var(--text-secondary)] text-base sm:text-lg text-center max-w-xl"
-        >
-          Building scalable systems from frontend to infrastructure
-        </motion.p>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="mx-auto max-w-2xl text-center text-[var(--text-secondary)] text-sm sm:text-base leading-relaxed"
-        >
-          Software Engineer with a B.Sc. in Computer Science and Google Cloud PCA
-          certification. I design and build full-stack applications, cloud-native
-          infrastructure, and automated CI/CD pipelines — delivering reliable,
-          scalable systems from code to production.
-        </motion.p>
-
-        {/* CTA Buttons */}
+        {/* Intro */}
         <motion.div
-          variants={itemVariants}
-          className="mt-4 flex flex-col items-center gap-4 sm:flex-row"
+          variants={item}
+          className="bento dots md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
         >
-          <button
-            onClick={() => setIsContactOpen(true)}
-            className="flex items-center gap-2 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] px-8 py-3 text-white font-medium hover:opacity-90 transition-opacity duration-300 cursor-pointer"
-          >
-            Get in Touch
-            <Image src={assets.right_arrow_white} alt="" className="w-4" />
-          </button>
+          <div>
+            <p className="eyebrow mb-5">Software Engineer · Israel</p>
+            <h1 className="f-display text-5xl sm:text-7xl font-bold leading-[1.02]">
+              Dori
+              <br />
+              Fourer<span className="text-[var(--accent)]">.</span>
+            </h1>
+            <p className="f-mono mt-6 min-h-8 text-base sm:text-lg text-[var(--accent-2)]" aria-live="off">
+              <span aria-hidden="true">&gt; </span>
+              {displayText}
+              <span className="typing-cursor" aria-hidden="true">_</span>
+            </p>
+            <p className="mt-6 max-w-lg text-[var(--muted)] leading-relaxed">
+              Software Engineer with a B.Sc. in Computer Science and Google Cloud PCA
+              certification. I design and build full-stack applications, cloud-native
+              infrastructure, and automated CI/CD pipelines — delivering reliable,
+              scalable systems from code to production.
+            </p>
+          </div>
 
-          <a
-            href="/Dori_Fourer.pdf"
-            download
-            className="flex items-center gap-2 rounded-full border border-white/20 px-8 py-3 text-[var(--text-secondary)] hover:border-[var(--primary)] hover:text-[var(--primary)] transition-all duration-300"
-          >
-            Download Resume
-            <Image src={assets.download_icon} alt="" className="w-4 opacity-60" />
-          </a>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button onClick={onContact} className="btn btn-primary">
+              Get in touch
+              <ArrowIcon />
+            </button>
+            <a href="/Dori_Fourer.pdf" download className="btn btn-ghost">
+              Download resume
+              <DownloadIcon />
+            </a>
+          </div>
         </motion.div>
 
-        {/* Social links */}
-        <motion.div variants={itemVariants} className="flex gap-4 mt-6">
-          {[
-            { href: "https://github.com/dori654", icon: assets.github_icon, label: "GitHub" },
-            { href: "https://linkedin.com/in/dori-fourer", icon: assets.linkedin_icon, label: "LinkedIn" },
-          ].map((social) => (
-            <motion.a
-              key={social.label}
-              href={social.href}
+        {/* Photo */}
+        <motion.div
+          variants={item}
+          className="bento relative min-h-[320px] md:row-span-2 lg:col-span-1"
+        >
+          <Image
+            src={assets.MyPic}
+            alt="Portrait of Dori Fourer"
+            fill
+            priority
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </motion.div>
+
+        {/* Certification */}
+        <motion.div variants={item} className="bento bento-accent flex flex-col justify-between gap-6 p-6">
+          <p className="eyebrow">Certified</p>
+          <div>
+            <p className="f-display text-xl font-semibold leading-snug">
+              Google Cloud Professional Cloud Architect
+            </p>
+            <p className="mt-2 text-sm text-[var(--muted)]">Multi-cloud · AWS &amp; GCP</p>
+          </div>
+        </motion.div>
+
+        {/* Socials */}
+        <motion.div variants={item} className="bento flex flex-col justify-between gap-6 p-6">
+          <p className="eyebrow">Find me</p>
+          <div className="flex gap-3">
+            <a
+              href="https://github.com/dori654"
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.1, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center justify-center w-12 h-12 rounded-full border border-white/10 hover:border-[var(--primary)] transition-colors duration-300"
-              aria-label={social.label}
+              className="icon-btn"
+              aria-label="GitHub"
             >
-              <Image src={social.icon} alt={social.label} className="w-5 brightness-0 invert opacity-60" />
-            </motion.a>
-          ))}
+              <GithubIcon />
+            </a>
+            <a
+              href="https://linkedin.com/in/dori-fourer"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="icon-btn"
+              aria-label="LinkedIn"
+            >
+              <LinkedinIcon />
+            </a>
+          </div>
         </motion.div>
       </motion.div>
-
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
-    </header>
+    </section>
   );
 };
 
