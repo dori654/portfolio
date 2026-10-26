@@ -21,6 +21,12 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
+const handleSpotlight = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+};
+
 export const Header = ({ onContact }) => {
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayText, setDisplayText] = useState(roles[0]);
@@ -61,7 +67,8 @@ export const Header = ({ onContact }) => {
         {/* Intro */}
         <motion.div
           variants={item}
-          className="bento dots md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
+          onMouseMove={handleSpotlight}
+          className="bento dots spotlight md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
         >
           <div>
             <p className="eyebrow mb-5">Software Engineer · Israel</p>

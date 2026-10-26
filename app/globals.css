@@ -89,6 +89,30 @@ body {
   background-size: 18px 18px;
 }
 
+/* Purple spotlight that follows the cursor (set --mx/--my from JS) */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    circle 220px at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 32%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 12%, transparent) 55%,
+    transparent 100%
+  );
+}
+.spotlight > * {
+  position: relative;
+}
+@media (hover: hover) {
+  .spotlight:hover::before {
+    opacity: 1;
+  }
+}
+
 /* ---------- Small building blocks ---------- */
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;
