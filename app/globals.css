@@ -90,13 +90,11 @@ body {
 }
 
 /* Cursor spotlight: the dot grid lights up purple around the pointer
-   (set --mx/--my from JS; tune with --spot-r / --spot-glow / --spot-dot) */
+   (set --mx/--my from JS; tune with --spot-r / --spot-dot) */
 .spotlight {
-  --spot-r: 120px;
-  --spot-glow: 10%;
-  --spot-dot: 1.6px;
+  --spot-r: 150px;
+  --spot-dot: 2px;
 }
-.spotlight::before,
 .spotlight::after {
   content: "";
   position: absolute;
@@ -104,17 +102,6 @@ body {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s ease;
-}
-/* faint purple haze */
-.spotlight::before {
-  background: radial-gradient(
-    circle calc(var(--spot-r) * 1.1) at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--accent) var(--spot-glow), transparent) 0%,
-    transparent 100%
-  );
-}
-/* purple dots, same grid as .dots, revealed only near the pointer */
-.spotlight::after {
   background-image: radial-gradient(var(--accent) var(--spot-dot), transparent calc(var(--spot-dot) + 0.4px));
   background-size: 18px 18px;
   -webkit-mask-image: radial-gradient(circle var(--spot-r) at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 100%);
@@ -124,7 +111,6 @@ body {
   position: relative;
 }
 @media (hover: hover) {
-  .spotlight:hover::before,
   .spotlight:hover::after {
     opacity: 1;
   }
