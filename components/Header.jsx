@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
 import { motion } from "framer-motion";
-import { GithubIcon, LinkedinIcon, ArrowIcon, DownloadIcon } from "./ui";
+import { GithubIcon, LinkedinIcon, ArrowIcon, DownloadIcon, trackSpotlight } from "./ui";
 
 const roles = [
   "Software Engineer",
@@ -19,12 +19,6 @@ const container = {
 const item = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-};
-
-const handleSpotlight = (e) => {
-  const rect = e.currentTarget.getBoundingClientRect();
-  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
 };
 
 export const Header = ({ onContact }) => {
@@ -67,7 +61,7 @@ export const Header = ({ onContact }) => {
         {/* Intro */}
         <motion.div
           variants={item}
-          onMouseMove={handleSpotlight}
+          onMouseMove={trackSpotlight}
           className="bento dots spotlight md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
         >
           <div>

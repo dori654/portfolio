@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Reveal, GithubIcon, LinkedinIcon, ArrowIcon } from "./ui";
+import { Reveal, trackSpotlight, GithubIcon, LinkedinIcon, ArrowIcon } from "./ui";
 
 const links = [
   { label: "About", href: "#about" },
@@ -13,7 +13,7 @@ const links = [
 const Footer = ({ onContact }) => {
   return (
     <footer className="mx-auto w-full max-w-6xl px-5 pt-10 pb-8">
-      <Reveal className="bento bento-accent dots flex flex-col items-start justify-between gap-8 p-8 sm:p-12 md:flex-row md:items-end">
+      <Reveal onMouseMove={trackSpotlight} className="bento bento-accent dots spotlight flex flex-col items-start justify-between gap-8 p-8 sm:p-12 md:flex-row md:items-end">
         <div>
           <p className="eyebrow mb-4">Contact</p>
           <h2 className="f-display text-4xl sm:text-6xl font-bold leading-tight">
