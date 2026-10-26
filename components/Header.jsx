@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { assets } from "@/assets/assets";
 import { motion } from "framer-motion";
-import { GithubIcon, LinkedinIcon, ArrowIcon, DownloadIcon } from "./ui";
+import { GithubIcon, LinkedinIcon, ArrowIcon, DownloadIcon, trackSpotlight } from "./ui";
 
 const roles = [
   "Software Engineer",
@@ -61,7 +61,8 @@ export const Header = ({ onContact }) => {
         {/* Intro */}
         <motion.div
           variants={item}
-          className="bento dots md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
+          onMouseMove={trackSpotlight}
+          className="bento dots spotlight md:col-span-2 lg:row-span-2 flex flex-col justify-between gap-10 p-6 sm:p-10"
         >
           <div>
             <p className="eyebrow mb-5">Software Engineer · Israel</p>

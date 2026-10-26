@@ -1,7 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
 
-export const Reveal = ({ children, delay = 0, className = "", as = "div" }) => {
+export const trackSpotlight = (e) => {
+  const rect = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
+};
+
+export const Reveal = ({ children, delay = 0, className = "", as = "div", ...rest }) => {
   const Tag = motion[as];
   return (
     <Tag
@@ -10,6 +16,7 @@ export const Reveal = ({ children, delay = 0, className = "", as = "div" }) => {
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, ease: "easeOut", delay }}
       className={className}
+      {...rest}
     >
       {children}
     </Tag>

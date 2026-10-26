@@ -54,6 +54,11 @@ import MyPic from "./mypic.jpeg";
 import linkedin_icon from "./linkedin.png";
 import github_icon from "./github.png";
 import javaScript from "./javascript.png";
+import claudeCode from "./claude-code.svg";
+import claudeApi from "./claude-api.svg";
+import langchain from "./langchain.svg";
+import supabase from "./supabase.svg";
+import n8n from "./n8n.svg";
 
 export const assets = {
   user_image,
@@ -391,11 +396,11 @@ export const techStackData = [
     category: "AI-Assisted Development",
     highlight: true,
     items: [
-      { name: "Claude Code" },
-      { name: "Claude API" },
-      { name: "LangChain" },
-      { name: "Supabase" },
-      { name: "n8n" },
+      { icon: claudeCode, name: "Claude Code" },
+      { icon: claudeApi, name: "Claude API" },
+      { icon: langchain, name: "LangChain" },
+      { icon: supabase, name: "Supabase" },
+      { icon: n8n, name: "n8n" },
     ],
   },
   {

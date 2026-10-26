@@ -89,6 +89,33 @@ body {
   background-size: 18px 18px;
 }
 
+/* Cursor spotlight: the dot grid lights up purple around the pointer
+   (set --mx/--my from JS; tune with --spot-r / --spot-dot) */
+.spotlight {
+  --spot-r: 150px;
+  --spot-dot: 2px;
+}
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background-image: radial-gradient(var(--accent) var(--spot-dot), transparent calc(var(--spot-dot) + 0.4px));
+  background-size: 18px 18px;
+  -webkit-mask-image: radial-gradient(circle var(--spot-r) at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 100%);
+  mask-image: radial-gradient(circle var(--spot-r) at var(--mx, 50%) var(--my, 50%), #000 0%, transparent 100%);
+}
+.spotlight > * {
+  position: relative;
+}
+@media (hover: hover) {
+  .spotlight:hover::after {
+    opacity: 1;
+  }
+}
+
 /* ---------- Small building blocks ---------- */
 .eyebrow {
   font-family: var(--font-mono), ui-monospace, monospace;
