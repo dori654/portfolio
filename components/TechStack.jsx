@@ -6,12 +6,12 @@ import { Section, SectionHeader } from "./ui";
 
 function TechStack() {
   return (
-    <Section id="techstack">
+    <Section id="techstack" tint>
       <SectionHeader id="techstack-title" title="Tools I build with." />
 
       <div className="panels">
         {techStackData.map((group) => (
-          <section key={group.category}>
+          <section key={group.category} className={group.highlight ? "panels__growth" : undefined}>
             <h3>{group.category}</h3>
             <ul className="tools">
               {group.items.map((tool) => (

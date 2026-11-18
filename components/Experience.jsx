@@ -11,7 +11,7 @@ function Experience() {
       <ol className="trail">
         {experienceData.map((job) => (
           <li key={job.company} className="trail__entry">
-            <p className="measured">{job.period}</p>
+            <p className={`pill trail__when${job.period === "Present" ? " pill--now" : ""}`}>{job.period}</p>
             <div>
               <h3>{job.role}</h3>
               <p className="trail__company">{job.company}</p>

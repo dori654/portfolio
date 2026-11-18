@@ -1,17 +1,11 @@
-import { Host_Grotesk, Atkinson_Hyperlegible_Mono } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const display = Host_Grotesk({
+// Chillax (Hum's face) loads from Fontshare below; Outfit stands in until it has.
+const display = Outfit({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["500", "600"],
   variable: "--nf-display",
-  display: "swap",
-});
-
-const mono = Atkinson_Hyperlegible_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--nf-mono",
   display: "swap",
 });
 
@@ -20,18 +14,20 @@ export const metadata = {
   description: "Software Engineer and DevOps Specialist. Building scalable systems from frontend to infrastructure.",
 };
 
-// Applies the saved theme before first paint to avoid a flash. Defaults to dark.
-const themeScript = `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}`;
+// Applies the saved theme before first paint to avoid a flash. Defaults to light.
+const themeScript = `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}`;
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="dark"
+      data-theme="light"
       suppressHydrationWarning
-      className={`${display.variable} ${mono.variable}`}
+      className={display.variable}
     >
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link href="https://api.fontshare.com/v2/css?f[]=chillax@500,600&display=swap" rel="stylesheet" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
       <body>{children}</body>

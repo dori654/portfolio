@@ -7,8 +7,8 @@ export const SectionHeader = ({ id, title, intro }) => (
   </div>
 );
 
-export const Section = ({ id, children }) => (
-  <section id={id} className="section" aria-labelledby={`${id}-title`}>
+export const Section = ({ id, tint = false, children }) => (
+  <section id={id} className={`section${tint ? " section--tint" : ""}`} aria-labelledby={`${id}-title`}>
     <div className="container">{children}</div>
   </section>
 );

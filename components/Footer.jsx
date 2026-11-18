@@ -12,6 +12,7 @@ const links = [
 
 const Footer = ({ onContact }) => {
   return (
+    <div className="footer-wrap">
     <footer className="footer">
       <div className="container">
         <div className="footer__mast">
@@ -41,6 +42,7 @@ const Footer = ({ onContact }) => {
         </div>
       </div>
     </footer>
+    </div>
   );
 };
 

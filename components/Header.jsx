@@ -10,7 +10,9 @@ export const Header = ({ onContact }) => {
       <div className="container hero__grid">
         <div className="hero__copy">
           <h1 id="top-title">Dori Fourer</h1>
-          <p className="lead hero__lede">Software Engineer in Israel, from code to production.</p>
+          <p className="lead hero__lede">
+            Software Engineer in Israel, <mark>from code to production</mark>.
+          </p>
 
           <div className="hero__actions">
             <button type="button" onClick={onContact} className="btn btn--primary">
@@ -22,7 +24,8 @@ export const Header = ({ onContact }) => {
           </div>
         </div>
 
-        <aside className="panel record hero__record" aria-label="Record">
+        <div className="hero__record">
+        <aside className="panel record" aria-label="Record">
           <div className="record__portrait">
             <Image
               src={assets.MyPic}
@@ -70,6 +73,7 @@ export const Header = ({ onContact }) => {
             </div>
           </dl>
         </aside>
+        </div>
       </div>
     </section>
   );
