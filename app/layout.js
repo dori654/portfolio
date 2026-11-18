@@ -1,44 +1,36 @@
-import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 
-const display = Space_Grotesk({
+// Chillax (Hum's face) loads from Fontshare below; Outfit stands in until it has.
+const display = Outfit({
   subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const body = Inter({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  weight: ["500", "600"],
+  variable: "--nf-display",
   display: "swap",
 });
 
 export const metadata = {
   title: "Dori Fourer | Software Engineer",
-  description: "Software Engineer & DevOps Specialist — Building scalable systems from frontend to infrastructure.",
+  description: "Software Engineer and DevOps Specialist. Building scalable systems from frontend to infrastructure.",
 };
 
-// Applies the saved theme before first paint to avoid a flash. Defaults to dark.
-const themeScript = `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}`;
+// Applies the saved theme before first paint to avoid a flash. Defaults to light.
+const themeScript = `try{var t=localStorage.getItem("theme");document.documentElement.dataset.theme=t==="dark"?"dark":"light"}catch(e){document.documentElement.dataset.theme="light"}`;
 
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="dark"
+      data-theme="light"
       suppressHydrationWarning
-      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      className={display.variable}
     >
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link href="https://api.fontshare.com/v2/css?f[]=chillax@500,600&display=swap" rel="stylesheet" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="antialiased overflow-x-hidden">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

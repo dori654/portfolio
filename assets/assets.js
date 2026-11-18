@@ -170,7 +170,7 @@ export const projectDetails = {
     subtitle: "End-to-end cloud-native system built with production-grade DevOps practices",
     techTags: ["Kubernetes", "Docker", "Terraform", "AWS", "GCP", "ArgoCD", "GitHub Actions", "Prometheus", "Grafana", "ELK Stack", "Jenkins"],
     overview:
-      "A comprehensive cloud-native platform designed and operated as a production-like DevOps environment. The project covers the full lifecycle — from application development and infrastructure provisioning to automated deployments and real-time monitoring.",
+      "A comprehensive cloud-native platform designed and operated as a production-like DevOps environment. The project covers the full lifecycle: from application development and infrastructure provisioning to automated deployments and real-time monitoring.",
     sections: [
       {
         title: "Architecture Overview",
@@ -233,7 +233,7 @@ export const projectDetails = {
     {
       title: "How It Works",
       description:
-        "A host creates a room and shares a join code. Participants answer a short preference questionnaire, and Claude generates a tailored movie shortlist for the group. Players then vote in real-time Kahoot-style rounds until a winner is chosen — making movie night decisions fun instead of painful.",
+        "A host creates a room and shares a join code. Participants answer a short preference questionnaire, and Claude generates a tailored movie shortlist for the group. Players then vote in real-time Kahoot-style rounds until a winner is chosen, making movie night decisions fun instead of painful.",
       image: "/movihoot-images/host-1.jpeg",
     },
     {
@@ -245,7 +245,7 @@ export const projectDetails = {
     {
       title: "AI-Powered Recommendations",
       description:
-        "Claude API analyzes the group's collective preferences — genres, moods, languages, and viewing history — to generate a curated shortlist from the TMDB catalog. The recommendations balance individual tastes with group overlap, surfacing movies everyone is likely to enjoy.",
+        "Claude API analyzes the group's collective preferences (genres, moods, languages, and viewing history) to generate a curated shortlist from the TMDB catalog. The recommendations balance individual tastes with group overlap, surfacing movies everyone is likely to enjoy.",
       image: "/movihoot-images/results.jpeg",
     },
     {
@@ -351,7 +351,7 @@ export const experienceData = [
     company: "Govo",
     period: "Present",
     points: [
-      "Developing software and owning products end to end — from building to marketing and product management.",
+      "Developing software and owning products end to end, from building to marketing and product management.",
       "Building marketing and workflow automations.",
       "Creating AI video-generation workflows with n8n.",
       "Integrating third-party APIs to gather data and generate content.",
