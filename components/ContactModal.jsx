@@ -50,58 +50,58 @@ const ContactModal = ({ isOpen, onClose }) => {
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="dialog">
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+            className="dialog__scrim"
             onClick={onClose}
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="contact-title"
-            className="bento relative p-6 sm:p-8 max-w-md w-full"
+            className="dialog__panel"
           >
             {/* Close */}
             <button
+              type="button"
               onClick={onClose}
-              className="icon-btn absolute top-3 right-3 text-xl"
+              className="icon-btn dialog__close"
               aria-label="Close modal"
             >
               &times;
             </button>
 
-            <h2 id="contact-title" className="f-display text-2xl sm:text-3xl font-bold mb-2">Get In Touch</h2>
-            <p className="text-[var(--muted)] text-sm mb-6">
-              Have a question or want to work together? I'd love to hear from you.
+            <h2 id="contact-title" style={{ fontSize: "var(--text-2xl)" }}>Get In Touch</h2>
+            <p style={{ color: "var(--color-muted)", fontSize: "var(--text-sm)", margin: "var(--space-sm) 0 var(--space-lg)" }}>
+              Have a question or want to work together? I&rsquo;d love to hear from you.
             </p>
 
             {/* Status */}
             {status && (
               <div
-                className={`mb-4 p-3 rounded-lg text-sm ${
-                  status === "success"
-                    ? "bg-emerald-500/10 text-emerald-600 border border-emerald-500/30"
-                    : "bg-red-500/10 text-red-600 border border-red-500/30"
-                }`}
+                role="status"
+                className={`status ${status === "success" ? "status--ok" : "status--bad"}`}
+                style={{ marginBottom: "var(--space-md)" }}
               >
                 {status === "success" ? "Message sent successfully!" : "Failed to send. Please try again."}
               </div>
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="contact-name" className="block text-[var(--muted)] text-sm mb-2">Name</label>
+            <form onSubmit={handleSubmit} style={{ display: "grid", gap: "var(--space-md)" }}>
+              <div className="field">
+                <label htmlFor="contact-name">Name</label>
                 <input
                   type="text"
                   id="contact-name"
@@ -110,13 +110,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50"
                   placeholder="Your Name"
                 />
               </div>
 
-              <div>
-                <label htmlFor="contact-email" className="block text-[var(--muted)] text-sm mb-2">Email</label>
+              <div className="field">
+                <label htmlFor="contact-email">Email</label>
                 <input
                   type="email"
                   id="contact-email"
@@ -125,13 +124,12 @@ const ContactModal = ({ isOpen, onClose }) => {
                   onChange={handleChange}
                   required
                   disabled={loading}
-                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors disabled:opacity-50"
                   placeholder="your@email.com"
                 />
               </div>
 
-              <div>
-                <label htmlFor="contact-message" className="block text-[var(--muted)] text-sm mb-2">Message</label>
+              <div className="field">
+                <label htmlFor="contact-message">Message</label>
                 <textarea
                   id="contact-message"
                   name="message"
@@ -140,7 +138,6 @@ const ContactModal = ({ isOpen, onClose }) => {
                   required
                   disabled={loading}
                   rows="4"
-                  className="w-full px-4 py-2.5 rounded-lg bg-[var(--surface-2)] border border-[var(--border)] text-[var(--text)] focus:outline-none focus:border-[var(--accent)] transition-colors resize-none disabled:opacity-50"
                   placeholder="Your message..."
                 />
               </div>
@@ -148,7 +145,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="btn btn-primary w-full mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="btn btn--primary btn--block"
               >
                 {loading ? "Sending..." : "Send Message"}
               </button>

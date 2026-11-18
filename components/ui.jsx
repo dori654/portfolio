@@ -1,41 +1,15 @@
 "use client";
-import { motion } from "framer-motion";
 
-export const trackSpotlight = (e) => {
-  const rect = e.currentTarget.getBoundingClientRect();
-  e.currentTarget.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-  e.currentTarget.style.setProperty("--my", `${e.clientY - rect.top}px`);
-};
-
-export const Reveal = ({ children, delay = 0, className = "", as = "div", ...rest }) => {
-  const Tag = motion[as];
-  return (
-    <Tag
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, ease: "easeOut", delay }}
-      className={className}
-      {...rest}
-    >
-      {children}
-    </Tag>
-  );
-};
-
-export const SectionHeader = ({ index, label, title, intro }) => (
-  <Reveal className="mb-8 sm:mb-10 max-w-2xl">
-    <p className="eyebrow mb-3">
-      {index} / {label}
-    </p>
-    <h2 className="f-display text-3xl sm:text-5xl font-bold">{title}</h2>
-    {intro && <p className="mt-4 text-[var(--muted)] leading-relaxed">{intro}</p>}
-  </Reveal>
+export const SectionHeader = ({ id, title, intro }) => (
+  <div className="section__head">
+    <h2 id={id}>{title}</h2>
+    {intro && <p className="section__intro">{intro}</p>}
+  </div>
 );
 
 export const Section = ({ id, children }) => (
-  <section id={id} className="scroll-mt-24 mx-auto w-full max-w-6xl px-5 py-14 sm:py-20">
-    {children}
+  <section id={id} className="section" aria-labelledby={`${id}-title`}>
+    <div className="container">{children}</div>
   </section>
 );
 
@@ -51,22 +25,10 @@ export const LinkedinIcon = ({ size = 20 }) => (
   </svg>
 );
 
-export const ArrowIcon = ({ size = 18, className = "" }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-);
-
 export const ExternalIcon = ({ size = 18 }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
     <polyline points="15 3 21 3 21 9" />
     <line x1="10" y1="14" x2="21" y2="3" />
-  </svg>
-);
-
-export const DownloadIcon = ({ size = 18 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M12 3v12M7 10l5 5 5-5M4 21h16" />
   </svg>
 );

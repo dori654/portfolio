@@ -2,15 +2,9 @@
 
 import { useParams } from "next/navigation";
 import { projectDetails } from "@/assets/assets";
-import { motion, MotionConfig } from "framer-motion";
+import { MotionConfig } from "framer-motion";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
-import { ArrowIcon } from "@/components/ui";
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
 
 export default function ProjectPage() {
   const { slug } = useParams();
@@ -18,9 +12,9 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-        <h1 className="f-display text-3xl font-bold">Project not found</h1>
-        <Link href="/" className="text-[var(--accent)] hover:underline">
+      <div className="container" style={{ minHeight: "100vh", display: "grid", placeContent: "center", justifyItems: "start", gap: "var(--space-md)" }}>
+        <h1>Project not found</h1>
+        <Link href="/" className="btn">
           Back to Home
         </Link>
       </div>
@@ -29,87 +23,48 @@ export default function ProjectPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <div className="min-h-screen">
-      {/* Back nav */}
-      <nav className="fixed top-4 inset-x-0 z-50 px-4">
-        <div className="mx-auto flex max-w-4xl items-center justify-between rounded-full border border-[var(--border)] bg-[var(--surface)]/85 py-2 pl-5 pr-2 backdrop-blur-xl shadow-[var(--shadow)]">
-          <Link
-            href="/#work"
-            className="flex items-center gap-2 text-sm text-[var(--muted)] hover:text-[var(--accent)] transition-colors"
-          >
-            <ArrowIcon className="rotate-180" />
-            Back to Projects
-          </Link>
-          <ThemeToggle />
+      <header className="nav">
+        <div className="container">
+          <nav aria-label="Project" className="nav__bar">
+            <Link href="/#work" className="nav__mark" style={{ fontSize: "var(--text-md)" }}>
+              Back to Projects
+            </Link>
+            <div className="nav__actions">
+              <ThemeToggle />
+            </div>
+          </nav>
         </div>
-      </nav>
+      </header>
 
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl pt-32 pb-12 px-5">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
-        >
-          <motion.p
-            variants={fadeInUp}
-            className="eyebrow mb-3"
-          >
-            Project
-          </motion.p>
-          <motion.h1
-            variants={fadeInUp}
-            className="f-display text-4xl sm:text-6xl font-bold mb-4"
-          >
-            {project.title}
-          </motion.h1>
-          <motion.p
-            variants={fadeInUp}
-            className="text-lg text-[var(--muted)] max-w-3xl mb-8"
-          >
-            {project.subtitle}
-          </motion.p>
+      <main>
+        <section className="container detail__hero" aria-labelledby="project-title">
+          <h1 id="project-title" style={{ fontSize: "var(--text-display-s)" }}>{project.title}</h1>
+          <p className="lead" style={{ color: "var(--color-ink-2)" }}>{project.subtitle}</p>
 
-          {/* Tech tags */}
-          <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 mb-12">
+          <ul className="detail__tags">
             {project.techTags.map((tag) => (
-              <span
-                key={tag}
-                className="chip chip-accent"
-              >
-                {tag}
-              </span>
+              <li key={tag}>{tag}</li>
             ))}
-          </motion.div>
+          </ul>
 
-          {/* Overview */}
-          <motion.div variants={fadeInUp} className="bento p-6 sm:p-8 max-w-4xl">
-            <h2 className="f-display text-xl font-semibold mb-3">Overview</h2>
-            <p className="text-[var(--muted)] leading-relaxed">
-              {project.overview}
-            </p>
-          </motion.div>
-        </motion.div>
-      </section>
+          <div className="panel detail__overview">
+            <h2 style={{ fontSize: "var(--text-xl)" }}>Overview</h2>
+            <p style={{ marginTop: "var(--space-sm)", color: "var(--color-muted)" }}>{project.overview}</p>
+          </div>
+        </section>
 
-      {/* Sections */}
-      <section className="mx-auto max-w-6xl px-5 pb-20 space-y-16">
-        {project.sections.map((section, index) => (
-          <ProjectSection key={index} section={section} index={index} />
-        ))}
-      </section>
+        <section className="container">
+          {project.sections.map((section, index) => (
+            <ProjectSection key={index} section={section} index={index} />
+          ))}
+        </section>
 
-      {/* Back to projects */}
-      <div className="px-5 pb-20 text-center">
-        <Link
-          href="/#work"
-          className="btn btn-ghost"
-        >
-          <ArrowIcon className="rotate-180" />
-          Back to All Projects
-        </Link>
-      </div>
-    </div>
+        <div className="container" style={{ paddingBlock: "var(--space-2xl) var(--section-gap-s)" }}>
+          <Link href="/#work" className="btn">
+            Back to All Projects
+          </Link>
+        </div>
+      </main>
     </MotionConfig>
   );
 }
@@ -118,37 +73,21 @@ function ProjectSection({ section, index }) {
   const isEven = index % 2 === 0;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7 }}
-      className={`flex flex-col ${isEven ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 lg:gap-12 items-center`}
-    >
+    <div className={`detail__section ${isEven ? "" : "detail__section--flip"}`}>
       {/* Image */}
       {section.image && (
-        <div className="w-full lg:w-1/2">
-          <div className="bento">
-            <img
-              src={section.image}
-              alt={section.title ?? ""}
-              className="w-full h-auto object-cover"
-            />
-          </div>
+        <div className="detail__shot">
+          <img src={section.image} alt={section.title ?? ""} />
         </div>
       )}
 
       {/* Text */}
       {section.title && (
-      <div className="w-full lg:w-1/2">
-        <h3 className="f-display text-2xl sm:text-3xl font-bold mb-4">
-          {section.title}
-        </h3>
-        <p className="text-[var(--muted)] leading-relaxed">
-          {section.description}
-        </p>
-      </div>
+        <div className="detail__text">
+          <h2 style={{ fontSize: "var(--text-2xl)" }}>{section.title}</h2>
+          <p>{section.description}</p>
+        </div>
       )}
-    </motion.div>
+    </div>
   );
 }
